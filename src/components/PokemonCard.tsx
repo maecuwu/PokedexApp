@@ -1,6 +1,8 @@
 import { Dimensions, View, TouchableOpacity, StyleSheet, Text, Image } from 'react-native';
 import { SimplePokemon } from '../interfaces/pokemonInterfaces';
 import { FadeInImage } from './FadeInImage';
+import { useEffect, useState, useRef } from 'react';
+import ImageColors from 'react-native-image-colors'
 
 
 const { width: windowWidth } = Dimensions.get('window');
@@ -11,13 +13,42 @@ interface Props {
 
 
 export const PokemonCard = ({ pokemon }: Props) => {
+
+    const [bgColor, setBgColor] = useState('grey');
+    const [fontColor, setFontColor] = useState('white');
+    const isMounted = useRef(true);
+
+
+    useEffect(() => {
+
+        ImageColors.getColors(pokemon.picture, { fallback: 'grey' }).then(
+            (colors: any) => {
+
+                if (!isMounted.current) return;
+
+                if (colors.platform === 'android') {
+                    setBgColor(colors.dominant || 'grey')
+                    setFontColor(colors.darkMuted || 'white');
+                }
+            },
+        );
+
+        return () => {
+            isMounted.current = false;
+        }
+    }, []);
+
     return (
         <TouchableOpacity activeOpacity={0.7}>
-            <View style={{ ...styles.cardContainer, width: windowWidth * 0.4 }}>
+            <View style={{
+                ...styles.cardContainer,
+                width: windowWidth * 0.4,
+                backgroundColor: bgColor
+            }}>
 
-                <View>
-                    <Text style={styles.name}>
-                        {pokemon.name}
+                <View style={styles.nameContainer}>
+                    <Text style={{...styles.name, color: fontColor}}>
+                        {pokemon.name.charAt(0).toUpperCase() + pokemon.name.substring(1, 50)}
                         {'\n#' + pokemon.id}
                     </Text>
                 </View>
@@ -42,7 +73,6 @@ export const PokemonCard = ({ pokemon }: Props) => {
 const styles = StyleSheet.create({
     cardContainer: {
         marginHorizontal: 10,
-        backgroundColor: 'grey',
         height: 120,
         marginBottom: 25,
         borderRadius: 10,
@@ -53,15 +83,16 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.39,
         shadowRadius: 8.30,
-
         elevation: 13,
     },
+    nameContainer: {
+        position: 'absolute',
+    },
     name: {
-        color: 'white',
         fontSize: 20,
         fontWeight: 'bold',
-        top: 20,
-        left: 10
+        top: 5,
+        left: 10,        
     },
     pokeball: {
         width: 100,
@@ -70,20 +101,20 @@ const styles = StyleSheet.create({
         right: -25,
         bottom: -25
     },
-    pokeballContainer:{
+    pokeballContainer: {
         position: 'absolute',
         width: 100,
         height: 100,
         bottom: 0,
         right: 0,
         overflow: 'hidden',
-        opacity: 0.5
+        opacity: 0.7
     },
     pokemonImage: {
-        width: 120,
-        height: 120,
+        width: 100,
+        height: 100,
         position: 'absolute',
         right: -5,
-        bottom: -5
+        bottom: -5,
     }
 })
