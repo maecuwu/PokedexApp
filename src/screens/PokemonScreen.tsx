@@ -1,9 +1,11 @@
 import { StackScreenProps } from '@react-navigation/stack';
-import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import { RootStackParams } from '../navigator/StackNavigator';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeInImage } from '../components/FadeInImage';
+import { usePokemon } from '../hooks/usePokemon';
+import { PokemonDetails } from '../components/PokemonDetails';
 
 
 
@@ -12,15 +14,17 @@ interface Props extends StackScreenProps<RootStackParams, 'PokemonScreen'> { };
 
 export const PokemonScreen = ({ navigation, route }: Props) => {
 
-    const { color, pokemon } = route.params;
+    const { bgColor, pokemon, fontColor } = route.params;
     const { top } = useSafeAreaInsets();
+
+    const { isLoading, pokemon: pokemonInfo } = usePokemon(pokemon.id)
 
 
     return (
-        <View>
+        <View style={{ flex: 1 }}>
             <View style={{
                 ...styles.headerContainer,
-                backgroundColor: color,
+                backgroundColor: bgColor,
             }}>
 
                 <TouchableOpacity
@@ -29,26 +33,37 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                     onPress={() => navigation.goBack()}
                 >
 
-                    <Icon name='arrow-back-outline' color='white' size={35} />
+                    <Icon name='arrow-back-outline' color={fontColor} size={35} />
 
                 </TouchableOpacity>
 
-                <Text style={{ ...styles.pokemonName, top: top + 40 }}>
+                <Text style={{ ...styles.pokemonName, top: top + 40, color: fontColor }}>
                     {pokemon.name.charAt(0).toUpperCase() + pokemon.name.substring(1, 50)}
                     {'\n#' + pokemon.id}
                 </Text>
 
-                <Image 
+                <Image
                     source={require('../assets/pokebola-blanca.png')}
                     style={styles.pokeball}
                 />
 
-                <FadeInImage 
+                <FadeInImage
                     uri={pokemon.picture}
                     style={styles.pokemonImage}
                 />
 
             </View>
+
+            {
+                isLoading
+                    ? (
+                        <View style={styles.loadingContainer}>
+                            <ActivityIndicator color={bgColor} size={50} />
+                        </View>
+                    )
+                    : <PokemonDetails pokemon={pokemonInfo!} color={bgColor}/>
+            }
+
         </View>
     )
 }
@@ -67,7 +82,6 @@ const styles = StyleSheet.create({
     },
     pokemonName: {
         fontSize: 40,
-        color: 'white',
         alignSelf: 'flex-start',
         left: 20
     },
@@ -82,5 +96,10 @@ const styles = StyleSheet.create({
         height: 250,
         position: 'absolute',
         bottom: -15
+    },
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 })
