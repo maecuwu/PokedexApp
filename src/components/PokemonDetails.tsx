@@ -22,7 +22,8 @@ export const PokemonDetails = ({ pokemon, color }: Props) => {
                 <View style={{ flexDirection: 'row' }}>
                     {
                         pokemon.types.map(({ type }) => (
-                            <Text style={{ ...styles.regularText, marginRight: 10 }}> {type.name} </Text>
+                            <Text key={type.name}
+                            style={{ ...styles.regularText, marginRight: 10 }}> {type.name} </Text>
                         ))
                     }
                 </View>
