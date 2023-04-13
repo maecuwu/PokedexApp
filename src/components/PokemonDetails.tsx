@@ -49,7 +49,8 @@ export const PokemonDetails = ({ pokemon, color }: Props) => {
                 <View style={{ flexDirection: 'row' }}>
                     {
                         pokemon.abilities.map(({ ability }) => (
-                            <Text style={{ ...styles.regularText, marginRight: 10 }}> {ability.name} </Text>
+                            <Text key={ability.name}
+                                style={{ ...styles.regularText, marginRight: 10 }}> {ability.name} </Text>
                         ))
                     }
                 </View>
@@ -61,7 +62,8 @@ export const PokemonDetails = ({ pokemon, color }: Props) => {
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
                     {
                         pokemon.moves.map(({ move }) => (
-                            <Text style={{ ...styles.regularText, marginRight: 10 }}> {move.name} </Text>
+                            <Text key={move.name}
+                                style={{ ...styles.regularText, marginRight: 10 }}> {move.name} </Text>
                         ))
                     }
                 </View>
@@ -73,7 +75,7 @@ export const PokemonDetails = ({ pokemon, color }: Props) => {
                 <View>
                     {
                         pokemon.stats.map(( stat ) => (
-                            <View style={{flexDirection: 'row'}}>
+                            <View style={{flexDirection: 'row'}} key={stat.stat.name}>
                                 <Text style={{ ...styles.regularText, marginRight: 10 }}> {stat.stat.name} </Text>
                                 <View style={{...styles.statBar, width: stat.base_stat, backgroundColor: color}}></View>
                                 <Text style={{ ...styles.regularText, fontWeight: 'bold' }}> {stat.base_stat} </Text>
