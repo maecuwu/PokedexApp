@@ -2,6 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StackNavigator } from './StackNavigator';
 import { SearchScreen } from '../screens/SearchScreen';
 import Icon from 'react-native-vector-icons/Ionicons'
+import { TeamsScreen } from '../screens/TeamsScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -43,6 +44,16 @@ export const TabsNavigator = () => {
                     tabBarLabel: 'Buscar',
                     tabBarIcon: ( ({color}) => (
                         <Icon color={color} size={25} name='search-outline'/>
+                    ))
+                }}      
+            />
+            <Tab.Screen 
+                name="TeamsScreen" 
+                component={TeamsScreen} 
+                options={{
+                    tabBarLabel: 'Equipos',
+                    tabBarIcon: ( ({color}) => (
+                        <Icon color={color} size={25} name='layers-outline'/>
                     ))
                 }}      
             />
