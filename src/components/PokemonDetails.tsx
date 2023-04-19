@@ -87,7 +87,7 @@ export const PokemonDetails = ({ pokemon, color }: Props) => {
             </View>
 
             {/* FINAL DE PAGINA */}
-            <View style={{...styles.container, marginTop: 20, alignItems: 'center'}}>
+            <View style={{...styles.container, marginTop: 20, alignItems: 'center', marginBottom: 30}}>
                 <FadeInImage uri={pokemon.sprites.front_default} style={styles.basicSprite}/>
             </View>
 

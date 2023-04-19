@@ -9,7 +9,7 @@ import { TeamsRootStackParams } from '../navigator/TeamsStackNavigator';
 
 
 
-type ScreenNavigationProp = StackNavigationProp<TeamsRootStackParams, 'TeamScreen'>;
+type ScreenNavigationProp = StackNavigationProp<TeamsRootStackParams, 'TeamsScreen'>;
 
 
 export const TeamsScreen = () => {
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     cardContainer: {
         width: '100%',
         height: 100,
-        backgroundColor: 'red',
+        backgroundColor: 'grey',
         marginVertical: 20,
         borderRadius: 20,
         borderColor: 'black',

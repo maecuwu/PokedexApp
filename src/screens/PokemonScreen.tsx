@@ -24,7 +24,7 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
         <View style={{ flex: 1 }}>
             <View style={{
                 ...styles.headerContainer,
-                backgroundColor: bgColor,
+                backgroundColor: bgColor
             }}>
 
                 <TouchableOpacity
