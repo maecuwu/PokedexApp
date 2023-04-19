@@ -69,6 +69,12 @@ export const TeamsScreen = () => {
                 <View style={styles.cardContainer}>
 
                 </View>
+                <View style={styles.cardContainer}>
+
+                </View>
+                <View style={styles.cardContainer}>
+
+                </View>
 
             </View>
 
