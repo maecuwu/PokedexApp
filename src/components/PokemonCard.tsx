@@ -4,7 +4,7 @@ import { FadeInImage } from './FadeInImage';
 import { useEffect, useState, useRef } from 'react';
 import ImageColors from 'react-native-image-colors'
 import { CommonActions, useNavigation } from '@react-navigation/native';
-import { RootStackParams } from '../navigator/StackNavigator';
+import { PokemonRootStackParams } from '../navigator/PokemonStackNavigator';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 
@@ -14,7 +14,7 @@ interface Props {
     pokemon: SimplePokemon;
 }
 
-type ScreenNavigationProp = StackNavigationProp<RootStackParams, 'PokemonScreen'>;
+type ScreenNavigationProp = StackNavigationProp<PokemonRootStackParams, 'PokemonScreen'>;
 
 export const PokemonCard = ({ pokemon }: Props) => {
 

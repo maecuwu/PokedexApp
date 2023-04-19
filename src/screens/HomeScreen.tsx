@@ -50,7 +50,8 @@ export const HomeScreen = () => {
                             style={{ height: 100 }}
                             size={25}
                             color='grey'
-                        />}
+                        />
+                    }
                 />
             </View>
         </>

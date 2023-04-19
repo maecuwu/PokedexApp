@@ -1,6 +1,6 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import { Text, View, StyleSheet, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
-import { RootStackParams } from '../navigator/StackNavigator';
+import { PokemonRootStackParams } from '../navigator/PokemonStackNavigator';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeInImage } from '../components/FadeInImage';
@@ -9,7 +9,7 @@ import { PokemonDetails } from '../components/PokemonDetails';
 
 
 
-interface Props extends StackScreenProps<RootStackParams, 'PokemonScreen'> { };
+interface Props extends StackScreenProps<PokemonRootStackParams, 'PokemonScreen'> { };
 
 
 export const PokemonScreen = ({ navigation, route }: Props) => {

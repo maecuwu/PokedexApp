@@ -4,15 +4,15 @@ import { PokemonScreen } from '../screens/PokemonScreen';
 import { SimplePokemon } from '../interfaces/pokemonInterfaces';
 
 
-export type RootStackParams = {
+export type PokemonRootStackParams = {
     HomeScreen: undefined;
     PokemonScreen: { pokemon: SimplePokemon, bgColor: string, fontColor: string};
 }
 
 
-const Stack = createStackNavigator<RootStackParams>();
+const Stack = createStackNavigator<PokemonRootStackParams>();
 
-export const StackNavigator = () => {
+export const PokemonStackNavigator = () => {
     return (
         <Stack.Navigator
             screenOptions={{

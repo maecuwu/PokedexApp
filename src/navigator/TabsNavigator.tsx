@@ -1,8 +1,9 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { StackNavigator } from './StackNavigator';
+import { PokemonStackNavigator } from './PokemonStackNavigator';
 import { SearchScreen } from '../screens/SearchScreen';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { TeamsScreen } from '../screens/TeamsScreen';
+import { TeamsStackNavigator } from './TeamsStackNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -29,7 +30,7 @@ export const TabsNavigator = () => {
         >
             <Tab.Screen 
                 name="Home" 
-                component={StackNavigator} 
+                component={PokemonStackNavigator} 
                 options={{
                     tabBarLabel: 'Pokedex',
                     tabBarIcon: ( ({color}) => (
@@ -48,8 +49,8 @@ export const TabsNavigator = () => {
                 }}      
             />
             <Tab.Screen 
-                name="TeamsScreen" 
-                component={TeamsScreen} 
+                name="Teams" 
+                component={TeamsStackNavigator} 
                 options={{
                     tabBarLabel: 'Equipos',
                     tabBarIcon: ( ({color}) => (
