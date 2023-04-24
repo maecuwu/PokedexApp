@@ -39,7 +39,7 @@ export const HomeScreen = () => {
                     showsVerticalScrollIndicator={false}
                     numColumns={2}
                     renderItem={({ item }) => (
-                        <PokemonCard pokemon={item} />
+                        <PokemonCard pokemon={item} addPossible={false}/>
                     )}
 
                     onEndReached={loadPokemons}

@@ -12,11 +12,12 @@ const { width: windowWidth } = Dimensions.get('window');
 
 interface Props {
     pokemon: SimplePokemon;
+    addPossible: boolean;
 }
 
 type ScreenNavigationProp = StackNavigationProp<PokemonRootStackParams, 'PokemonScreen'>;
 
-export const PokemonCard = ({ pokemon }: Props) => {
+export const PokemonCard = ({ pokemon, addPossible }: Props) => {
 
     const [bgColor, setBgColor] = useState('grey');
     const [fontColor, setFontColor] = useState('white');
@@ -49,7 +50,8 @@ export const PokemonCard = ({ pokemon }: Props) => {
             onPress={() => navigator.navigate('PokemonScreen', {
                 pokemon,
                 bgColor,
-                fontColor
+                fontColor,
+                addPossible
             })}
         >
             <View style={{

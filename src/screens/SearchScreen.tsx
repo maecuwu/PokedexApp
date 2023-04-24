@@ -1,4 +1,4 @@
-import { Text, View, FlatList, ActivityIndicator, StyleSheet, Dimensions } from 'react-native';
+import { Text, View, FlatList, Dimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { SearchInput } from '../components/SearchInput';
 import { globalStyles } from '../theme/appTheme';
@@ -23,14 +23,14 @@ export const SearchScreen = () => {
 
     useEffect(() => {
 
-        if (searchString.length == 0){
+        if (searchString.length == 0) {
             return setPokemonFiltered([]);
         }
 
-        if (isNaN(Number(searchString))){
+        if (isNaN(Number(searchString))) {
             setPokemonFiltered(
-                simplePokemonList.filter( poke => poke.name.toLowerCase().
-                        includes(searchString.toLowerCase()))
+                simplePokemonList.filter(poke => poke.name.toLowerCase().
+                    includes(searchString.toLowerCase()))
             );
         }
         else {
@@ -85,7 +85,7 @@ export const SearchScreen = () => {
                 showsVerticalScrollIndicator={false}
                 numColumns={2}
                 renderItem={({ item }) => (
-                    <PokemonCard pokemon={item} />
+                    <PokemonCard pokemon={item} addPossible={false} />
                 )}
             />
         </View>

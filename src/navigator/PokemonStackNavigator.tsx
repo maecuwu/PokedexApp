@@ -6,7 +6,7 @@ import { SimplePokemon } from '../interfaces/pokemonInterfaces';
 
 export type PokemonRootStackParams = {
     HomeScreen: undefined;
-    PokemonScreen: { pokemon: SimplePokemon, bgColor: string, fontColor: string};
+    PokemonScreen: { pokemon: SimplePokemon, bgColor: string, fontColor: string, addPossible: boolean};
 }
 
 

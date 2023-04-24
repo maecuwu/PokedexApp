@@ -1,11 +1,13 @@
 import { StackScreenProps } from '@react-navigation/stack';
-import { Text, View, StyleSheet, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
+import { useContext } from 'react'
+import { Text, View, StyleSheet, TouchableOpacity, Image, ActivityIndicator, Alert } from 'react-native';
 import { PokemonRootStackParams } from '../navigator/PokemonStackNavigator';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeInImage } from '../components/FadeInImage';
 import { usePokemon } from '../hooks/usePokemon';
 import { PokemonDetails } from '../components/PokemonDetails';
+import { PokemonTeamContext } from '../context/PokemonTeamContext';
 
 
 
@@ -14,10 +16,30 @@ interface Props extends StackScreenProps<PokemonRootStackParams, 'PokemonScreen'
 
 export const PokemonScreen = ({ navigation, route }: Props) => {
 
-    const { bgColor, pokemon, fontColor } = route.params;
+    const { bgColor, pokemon, fontColor, addPossible } = route.params;
     const { top } = useSafeAreaInsets();
 
-    const { isLoading, pokemon: pokemonInfo } = usePokemon(pokemon.id)
+    const { isLoading, pokemon: pokemonInfo } = usePokemon(pokemon.id);
+    const { addPokemon } = useContext(PokemonTeamContext);
+
+    const showAlert = () => {
+
+        if (addPokemon(pokemon)) {
+            Alert.alert(
+                'Pokemon añadido',
+                'Pokemon añadido a tu equipo',
+                [
+                    { text: 'OK' },
+                ]);
+        } else {
+            Alert.alert(
+                'Pokemon no añadido',
+                'No se ha podido añadir el pokemon a tu equipo',
+                [
+                    { text: 'OK' },
+                ]);
+        }
+    }
 
 
     return (
@@ -36,6 +58,23 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                     <Icon name='arrow-back-outline' color={fontColor} size={35} />
 
                 </TouchableOpacity>
+
+                {
+                    (addPossible)
+                    && (
+                        <TouchableOpacity
+                            activeOpacity={0.7}
+                            style={{ ...styles.addButton, top: top + 30 }}
+                            onPress={showAlert}
+                        >
+
+                            <Icon name='add-circle-outline' color={fontColor} size={35} />
+
+                        </TouchableOpacity>
+                    )
+                }
+
+
 
                 <Text style={{ ...styles.pokemonName, top: top + 40, color: fontColor }}>
                     {pokemon.name.charAt(0).toUpperCase() + pokemon.name.substring(1, 50)}
@@ -61,7 +100,7 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                             <ActivityIndicator color={bgColor} size={50} />
                         </View>
                     )
-                    : <PokemonDetails pokemon={pokemonInfo!} color={bgColor}/>
+                    : <PokemonDetails pokemon={pokemonInfo!} color={bgColor} />
             }
 
         </View>
@@ -79,6 +118,10 @@ const styles = StyleSheet.create({
     backButton: {
         position: 'absolute',
         left: 20
+    },
+    addButton: {
+        position: 'absolute',
+        right: 20
     },
     pokemonName: {
         fontSize: 40,

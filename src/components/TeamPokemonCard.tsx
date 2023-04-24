@@ -21,13 +21,15 @@ export const TeamPokemonCard = ({ pokemon }: Props) => {
     if (pokemon == null) {
         return (
             <View style={{ ...styles.pokemonContainer, justifyContent: 'center' }}>
-                <TouchableOpacity
-                    activeOpacity={0.8}
-                    style={styles.addBtn}
-                    onPress={() => navigation.navigate('AddPokemonScreen')}
-                >
-                    <Icon name='add-outline' color='black' size={20} />
-                </TouchableOpacity>
+                <View style={styles.addBtn}>
+                    <TouchableOpacity
+                        activeOpacity={0.8}
+                        onPress={() => navigation.navigate('AddPokemonScreen')}
+                    >
+                        <Icon name='add-outline' color='black' size={20} />
+                    </TouchableOpacity>
+                </View>
+                
                 <Text style={styles.title}> Sin pokemon </Text>
             </View>
         )
@@ -36,12 +38,14 @@ export const TeamPokemonCard = ({ pokemon }: Props) => {
 
     return (
         <View style={{ ...styles.pokemonContainer, justifyContent: 'center' }}>
-            <TouchableOpacity
-                activeOpacity={0.8}
-                style={styles.editBtn}
-            >
-                <Icon name='pencil-outline' color='black' size={20} />
-            </TouchableOpacity>
+            <View style={styles.addBtn}>
+                <TouchableOpacity
+                    activeOpacity={0.8}
+                >
+                    <Icon name='pencil-outline' color='black' size={20} />
+                </TouchableOpacity>
+            </View>
+
             <Text style={styles.title}> {pokemon.name} </Text>
         </View>
     )

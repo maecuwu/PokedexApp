@@ -6,7 +6,6 @@ import { TeamsRootStackParams } from '../navigator/TeamsStackNavigator';
 import { useState } from 'react';
 import { globalStyles } from '../theme/appTheme';
 import { TeamPokemonCard } from '../components/TeamPokemonCard';
-import { SimplePokemon } from '../interfaces/pokemonInterfaces';
 
 
 
