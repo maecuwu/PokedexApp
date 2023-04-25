@@ -25,7 +25,9 @@ export const TeamScreen = ({ navigation, route }: Props) => {
 
     const { top } = useSafeAreaInsets();
 
-    const { saveTeam, changeTeamName, getTeam, changeTeamPokemons, deleteTeam } = useContext(PokemonTeamContext);
+    const [nameChanged, setNameChanged] = useState(false);
+
+    const { saveTeam, changeTeamName, getTeam, changeTeamPokemons, deleteTeam, editPokemon } = useContext(PokemonTeamContext);
     let { PokemonTeam: { name, pokemons } } = useContext(PokemonTeamContext);
 
 
@@ -44,12 +46,17 @@ export const TeamScreen = ({ navigation, route }: Props) => {
 
     }, [])
 
+    const onChangeTeamName = (name: string) => {
+        changeTeamName(name);
+        setNameChanged(true);
+    }
+
     const onSaveTeam = () => {
 
-        if (editMode){
-            if (team !== undefined) {
-                getTeam(team).then((equipo) => {
-                    deleteTeam(equipo.name);
+        if (editMode) {
+            if (nameChanged && team !== undefined) {
+                getTeam(team).then((eq) => {
+                    deleteTeam(eq.name);
                 })
             }
         }
@@ -85,7 +92,7 @@ export const TeamScreen = ({ navigation, route }: Props) => {
                         autoCapitalize='none'
                         autoCorrect={false}
                         value={name}
-                        onChangeText={(value) => changeTeamName(value)}
+                        onChangeText={(value) => onChangeTeamName(value)}
                     />
                 </View>
 

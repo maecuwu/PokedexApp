@@ -85,7 +85,7 @@ export const SearchScreen = () => {
                 showsVerticalScrollIndicator={false}
                 numColumns={2}
                 renderItem={({ item }) => (
-                    <PokemonCard pokemon={item} addPossible={false} />
+                    <PokemonCard pokemon={item} addPossible={false} editPossible={false}/>
                 )}
             />
         </View>

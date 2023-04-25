@@ -149,6 +149,7 @@ const styles = StyleSheet.create({
     cardContainer: {
         width: '100%',
         height: 120,
+        marginTop: 20,
         backgroundColor: 'lightgrey',
         marginVertical: 20,
         borderRadius: 20,
@@ -167,6 +168,7 @@ const styles = StyleSheet.create({
     newTeamContainer: {
         width: 300,
         height: 40,
+        marginBottom: 20,
         backgroundColor: 'lightgreen',
         alignItems: 'center',
         justifyContent: 'center',
@@ -181,7 +183,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.32,
         shadowRadius: 5.46,
-
         elevation: 9,
     },
     allPokemonContainer: {

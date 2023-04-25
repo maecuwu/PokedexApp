@@ -15,7 +15,6 @@ export const MiniPokemonImage = ({ teamName }: Props) => {
     const [team, setTeam] = useState<PokemonTeam>();
 
 
-
     useEffect(() => {
         loadTeam();
     }, [])
@@ -24,8 +23,6 @@ export const MiniPokemonImage = ({ teamName }: Props) => {
         const team = await getTeam(teamName);
         setTeam(team);
     }
-
-
 
     return (
         <>

@@ -1,5 +1,5 @@
-import { Text, View, StyleSheet, Image } from 'react-native';
-import { FullPokemon, SimplePokemon } from '../interfaces/pokemonInterfaces';
+import { Text, View, StyleSheet } from 'react-native';
+import { SimplePokemon } from '../interfaces/pokemonInterfaces';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
@@ -19,13 +19,14 @@ export const TeamPokemonCard = ({ pokemon }: Props) => {
 
     const navigation = useNavigation<ScreenNavigationProp>();
 
+
     if (pokemon == null) {
         return (
             <View style={{ ...styles.pokemonContainer, justifyContent: 'center' }}>
                 <View style={styles.addBtn}>
                     <TouchableOpacity
                         activeOpacity={0.8}
-                        onPress={() => navigation.navigate('AddPokemonScreen')}
+                        onPress={() => navigation.navigate('AddPokemonScreen', { editMode: false })}
                     >
                         <Icon name='add-outline' color='black' size={20} />
                     </TouchableOpacity>
@@ -42,12 +43,13 @@ export const TeamPokemonCard = ({ pokemon }: Props) => {
             <View style={styles.editBtn}>
                 <TouchableOpacity
                     activeOpacity={0.8}
+                    onPress={() => navigation.navigate('AddPokemonScreen', { editMode: true })}
                 >
                     <Icon name='pencil-outline' color='black' size={20} />
                 </TouchableOpacity>
             </View>
 
-            <PokemonCard pokemon={pokemon} addPossible={false} />
+            <PokemonCard pokemon={pokemon} addPossible={false} editPossible={true} />
         </View>
     )
 }

@@ -18,7 +18,9 @@ const { width: screenWidth } = Dimensions.get('window');
 
 interface Props extends StackScreenProps<TeamsRootStackParams, 'AddPokemonScreen'> { };
 
-export const AddPokemonScreen = ({ navigation }: Props) => {
+export const AddPokemonScreen = ({ navigation, route }: Props) => {
+
+    const editMode = route.params.editMode;
 
     const { top } = useSafeAreaInsets();
 
@@ -57,6 +59,57 @@ export const AddPokemonScreen = ({ navigation }: Props) => {
         )
     }
 
+
+    if (editMode){
+        return (
+            <View style={{ flex: 1, marginHorizontal: 20 }}>
+    
+                <TouchableOpacity
+                    activeOpacity={0.7}
+                    style={{ ...styles.backButton, top: top + 10 }}
+                    onPress={() => navigation.goBack()}
+                >
+    
+                    <Icon name='arrow-back-outline' color='black' size={35} />
+    
+                </TouchableOpacity>
+    
+                <SearchInput
+                    onDebounce={(value) => setSearchString(value)}
+                    style={{
+                        position: 'absolute',
+                        zIndex: 999,
+                        width: screenWidth - 40,
+                        top: top + 60
+                    }}
+                />
+    
+                <FlatList
+                    ListHeaderComponent={
+                        <Text style={{
+                            ...globalStyles.title,
+                            ...globalStyles.globalMargin,
+                            top: top + 20,
+                            color: 'black',
+                            marginBottom: 20,
+                            paddingBottom: 10,
+                            marginTop: top + 80
+                        }}>
+                            {searchString}
+                        </Text>
+                    }
+    
+                    data={pokemonFiltered}
+                    keyExtractor={(pokemon) => pokemon.id}
+                    showsVerticalScrollIndicator={false}
+                    numColumns={2}
+                    renderItem={({ item }) => (
+                        <PokemonCard pokemon={item} addPossible={false} editPossible={true} />
+                    )}
+                />
+            </View>
+        )
+    }
 
     return (
         <View style={{ flex: 1, marginHorizontal: 20 }}>
@@ -101,7 +154,7 @@ export const AddPokemonScreen = ({ navigation }: Props) => {
                 showsVerticalScrollIndicator={false}
                 numColumns={2}
                 renderItem={({ item }) => (
-                    <PokemonCard pokemon={item} addPossible />
+                    <PokemonCard pokemon={item} addPossible editPossible={false}/>
                 )}
             />
         </View>

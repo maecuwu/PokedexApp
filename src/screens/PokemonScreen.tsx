@@ -19,13 +19,13 @@ interface Props extends StackScreenProps<PokemonRootStackParams, 'PokemonScreen'
 
 export const PokemonScreen = ({ navigation, route }: Props) => {
 
-    const { bgColor, pokemon, fontColor, addPossible } = route.params;
+    const { bgColor, pokemon, fontColor, addPossible, editPossible } = route.params;
     const { top } = useSafeAreaInsets();
 
     const { isLoading, pokemon: pokemonInfo } = usePokemon(pokemon.id);
-    const { addPokemon } = useContext(PokemonTeamContext);
+    const { addPokemon, editPokemon } = useContext(PokemonTeamContext);
 
-    const showAlert = () => {
+    const showAlertAdd = () => {
 
         if (addPokemon(pokemon)) {
             Alert.alert(
@@ -42,6 +42,18 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                     { text: 'OK' },
                 ]);
         }
+    }
+
+    const showAlertEdit = () => {
+
+        editPokemon(0, pokemon);
+
+        Alert.alert(
+            'Pokemon añadido',
+            `${pokemon.name} añadido a tu equipo y el anterior ha sido eliminado`,
+            [
+                { text: 'OK' },
+            ]);
     }
 
 
@@ -69,10 +81,25 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                         <TouchableOpacity
                             activeOpacity={0.7}
                             style={{ ...styles.addButton, top: top + 30 }}
-                            onPress={showAlert}
+                            onPress={showAlertAdd}
                         >
 
                             <Icon name='add-circle-outline' color={fontColor} size={35} />
+
+                        </TouchableOpacity>
+                    )
+                }
+
+                {
+                    (editPossible)
+                    && (
+                        <TouchableOpacity
+                            activeOpacity={0.7}
+                            style={{ ...styles.addButton, top: top + 30 }}
+                            onPress={showAlertEdit}
+                        >
+
+                            <Icon name='pencil-outline' color={fontColor} size={35} />
 
                         </TouchableOpacity>
                     )

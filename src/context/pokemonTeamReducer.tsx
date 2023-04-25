@@ -5,6 +5,7 @@ type PokemonTeamAction =
     | { type: 'addPokemon', payload: SimplePokemon }
     | { type: 'changeTeamName', payload: string }
     | { type: 'changeTeamPokemons', payload: SimplePokemon[] }
+    | { type: 'editPokemon', payload: {index: number, pokemon: SimplePokemon} }
 
 
 export const pokemonTeamReducer = (state: PokemonTeam, action: PokemonTeamAction): PokemonTeam => {
@@ -25,5 +26,23 @@ export const pokemonTeamReducer = (state: PokemonTeam, action: PokemonTeamAction
                 ...state,
                 pokemons: action.payload
             }
+        case 'editPokemon':
+            return {
+                ...state,
+                // Solucion mas cutre que cutrix ideal seria .map
+                pokemons: [
+                    ...state.pokemons.slice(0, action.payload.index),
+                    {
+                        name: action.payload.pokemon.name,
+                        id: action.payload.pokemon.id,
+                        picture: action.payload.pokemon.picture,
+                        color: action.payload.pokemon.color
+                    },
+                    ...state.pokemons.slice(action.payload.index + 1)
+                ]                
+            }
+        
+        default:
+            return state;
     }
 }

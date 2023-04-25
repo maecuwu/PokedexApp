@@ -8,9 +8,9 @@ import { SimplePokemon } from '../interfaces/pokemonInterfaces';
 
 export type TeamsRootStackParams = {
     TeamsScreen: undefined;
-    TeamScreen: {pokemonTeam?: string, editMode: boolean};
-    AddPokemonScreen: undefined;
-    PokemonScreen: { pokemon: SimplePokemon, bgColor: string, fontColor: string, addPossible: boolean};
+    TeamScreen: { pokemonTeam?: string, editMode: boolean };
+    AddPokemonScreen: { editMode: boolean };
+    PokemonScreen: { pokemon: SimplePokemon, bgColor: string, fontColor: string, addPossible: boolean, editPossible: boolean };
 }
 
 
@@ -21,7 +21,7 @@ export const TeamsStackNavigator = () => {
         <Stack.Navigator
             screenOptions={{
                 headerShown: false,
-                cardStyle:{
+                cardStyle: {
                     backgroundColor: 'white'
                 }
             }}
