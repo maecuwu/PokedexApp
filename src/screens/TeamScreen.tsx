@@ -23,7 +23,6 @@ export const TeamScreen = ({ navigation }: Props) => {
 
     const { PokemonTeamState: {name, pokemons}, saveTeam, changeTeamName, getTeam } = useContext(PokemonTeamContext);
     
-    getTeam();
 
     return (
         <View style={{ flex: 1 }}>

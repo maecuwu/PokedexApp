@@ -1,4 +1,4 @@
-import { Image, Text, View, ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
+import { Image, Text, View, ActivityIndicator, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { globalStyles } from '../theme/appTheme';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -8,6 +8,7 @@ import { TeamsRootStackParams } from '../navigator/TeamsStackNavigator';
 import { useContext, useEffect, useState } from 'react';
 import { PokemonTeamContext } from '../context/PokemonTeamContext';
 import { PokemonTeam } from '../interfaces/pokemonInterfaces';
+import { MiniPokemonImage } from '../components/MiniPokemonImage';
 
 
 
@@ -35,18 +36,10 @@ export const TeamsScreen = () => {
 
     }, [])
 
-    useEffect(() => {
-        allTeams?.forEach(e => {
-            getTeam(e).then((value) => {
-                setTeamsInfo([...teamsInfo, value]);
-            });
-        })
-    }, [allTeams])
-
 
 
     return (
-        <>
+        <ScrollView>
 
             <Image
                 source={require('../assets/pokebola.png')}
@@ -80,24 +73,17 @@ export const TeamsScreen = () => {
                 </TouchableOpacity>
 
                 {
-                    (teamsInfo.length !== undefined)
+                    (allTeams?.length !== undefined)
                         ? (
-                            teamsInfo.map((equipo, index) => (
-                                <View style={styles.cardContainer} key={equipo.name + index}>
+                            allTeams.map((equipo, index) => (
+                                <View style={styles.cardContainer} key={equipo + index}>
                                     <Text style={{ fontSize: 20, color: 'black' }}>
-                                        {equipo.name}
+                                        {equipo}
                                     </Text>
 
                                     <View style={styles.allPokemonContainer}>
                                     {
-                                        equipo.pokemons.map(({ name, picture }, index) => (
-                                            <View key={name + index}>
-                                                <Image 
-                                                    source={{ uri: picture }} 
-                                                    style={styles.pokeImg}
-                                                />
-                                            </View>
-                                        ))
+                                        <MiniPokemonImage teamName={equipo}/>
                                     }
                                     </View>
                                 </View>
@@ -113,7 +99,8 @@ export const TeamsScreen = () => {
 
             </View>
 
-        </>
+            <View style={{height: 200}}/>
+        </ScrollView>
     )
 }
 
@@ -162,9 +149,5 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         marginTop: 10
-    },
-    pokeImg: {
-        width: 55,
-        height: 55
     }
 });
