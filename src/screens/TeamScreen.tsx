@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, View, StyleSheet, Dimensions, TextInput, Scroll
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { TeamsRootStackParams } from '../navigator/TeamsStackNavigator';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { globalStyles } from '../theme/appTheme';
 import { TeamPokemonCard } from '../components/TeamPokemonCard';
 import { PokemonTeamContext } from '../context/PokemonTeamContext';
@@ -18,12 +18,46 @@ const { width: screenWidth } = Dimensions.get('window');
 interface Props extends StackScreenProps<TeamsRootStackParams, 'TeamScreen'> { };
 
 
-export const TeamScreen = ({ navigation }: Props) => {
+export const TeamScreen = ({ navigation, route }: Props) => {
+
+    const team = route.params.pokemonTeam;
+    const editMode = route.params.editMode;
 
     const { top } = useSafeAreaInsets();
 
-    const { PokemonTeamState: {name, pokemons}, saveTeam, changeTeamName, getTeam } = useContext(PokemonTeamContext);
-    
+    const { saveTeam, changeTeamName, getTeam, changeTeamPokemons, deleteTeam } = useContext(PokemonTeamContext);
+    let { PokemonTeam: { name, pokemons } } = useContext(PokemonTeamContext);
+
+
+    useEffect(() => {
+
+        if (team !== undefined) {
+            getTeam(team).then((equipo) => {
+                changeTeamName(equipo.name);
+                changeTeamPokemons(equipo.pokemons);
+                return;
+            })
+        }
+
+        changeTeamName('Equipo sin nombre');
+        changeTeamPokemons([]);
+
+    }, [])
+
+    const onSaveTeam = () => {
+
+        if (editMode){
+            if (team !== undefined) {
+                getTeam(team).then((equipo) => {
+                    deleteTeam(equipo.name);
+                })
+            }
+        }
+
+        saveTeam();
+        navigation.navigate('TeamsScreen');
+    }
+
 
     return (
         <ScrollView style={{ flex: 1 }}>
@@ -56,21 +90,21 @@ export const TeamScreen = ({ navigation }: Props) => {
                 </View>
 
                 <View style={styles.teamContainer}>
-                    <TeamPokemonCard pokemon={pokemons[0]}/>
-                    <TeamPokemonCard pokemon={pokemons[1]}/>
-                    <TeamPokemonCard pokemon={pokemons[2]}/>
-                    <TeamPokemonCard pokemon={pokemons[3]}/>
-                    <TeamPokemonCard pokemon={pokemons[4]}/>
-                    <TeamPokemonCard pokemon={pokemons[5]}/>
+                    <TeamPokemonCard pokemon={pokemons[0]} />
+                    <TeamPokemonCard pokemon={pokemons[1]} />
+                    <TeamPokemonCard pokemon={pokemons[2]} />
+                    <TeamPokemonCard pokemon={pokemons[3]} />
+                    <TeamPokemonCard pokemon={pokemons[4]} />
+                    <TeamPokemonCard pokemon={pokemons[5]} />
                 </View>
 
                 <TouchableOpacity
                     activeOpacity={0.8}
                     style={styles.saveBtn}
-                    onPress={saveTeam}
+                    onPress={onSaveTeam}
                 >
-                    <Text style={{ ...globalStyles.title, color: 'black', fontSize: 20 }}> 
-                        Guardar 
+                    <Text style={{ ...globalStyles.title, color: 'black', fontSize: 20 }}>
+                        Guardar
                     </Text>
                 </TouchableOpacity>
 

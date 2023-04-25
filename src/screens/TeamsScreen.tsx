@@ -1,4 +1,4 @@
-import { Image, Text, View, ActivityIndicator, FlatList, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
+import { Image, Text, View, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { globalStyles } from '../theme/appTheme';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -7,9 +7,9 @@ import { useNavigation } from '@react-navigation/native';
 import { TeamsRootStackParams } from '../navigator/TeamsStackNavigator';
 import { useContext, useEffect, useState } from 'react';
 import { PokemonTeamContext } from '../context/PokemonTeamContext';
-import { PokemonTeam } from '../interfaces/pokemonInterfaces';
 import { MiniPokemonImage } from '../components/MiniPokemonImage';
 import { Spacer } from '../components/Spacer';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 
 
@@ -22,7 +22,7 @@ export const TeamsScreen = () => {
     const { top } = useSafeAreaInsets();
     const navigator = useNavigation<ScreenNavigationProp>();
 
-    const { getAllTeams, getTeam } = useContext(PokemonTeamContext);
+    const { getAllTeams, deleteTeam } = useContext(PokemonTeamContext);
 
     const [refreshing, setRefreshing] = useState(false);
     const [allTeams, setallTeams] = useState<string[]>();
@@ -32,14 +32,21 @@ export const TeamsScreen = () => {
         getTeams();
     }, [])
 
-    const getTeams = async() => {
-
+    const getTeams = async () => {
         setRefreshing(true);
 
         setallTeams([]);
         const teams = await getAllTeams();
         setallTeams(teams);
 
+        setRefreshing(false);
+    }
+
+    const onDelete = (teamName: string) => {
+        deleteTeam(teamName);
+
+        setRefreshing(true);
+        getTeams();
         setRefreshing(false);
     }
 
@@ -79,7 +86,7 @@ export const TeamsScreen = () => {
 
                 <TouchableOpacity
                     activeOpacity={0.8}
-                    onPress={() => navigator.navigate('TeamScreen')}
+                    onPress={() => navigator.navigate('TeamScreen', { editMode: false })}
                 >
                     <View style={styles.newTeamContainer}>
                         <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'black' }}>
@@ -93,15 +100,31 @@ export const TeamsScreen = () => {
                         ? (
                             allTeams.map((equipo, index) => (
                                 <View style={styles.cardContainer} key={equipo + index}>
-                                    <Text style={{ fontSize: 20, color: 'black' }}>
-                                        {equipo}
-                                    </Text>
-
-                                    <View style={styles.allPokemonContainer}>
-                                        {
-                                            <MiniPokemonImage teamName={equipo} />
+                                    <TouchableOpacity
+                                        activeOpacity={0.8}
+                                        onPress={() =>
+                                            navigator.navigate('TeamScreen', { pokemonTeam: equipo, editMode: true })
                                         }
-                                    </View>
+                                    >
+                                        <Text style={{ fontSize: 20, color: 'black', textAlign: 'center' }}>
+                                            {equipo}
+                                        </Text>
+
+                                        <View style={styles.deleteBtn}>
+                                            <TouchableOpacity
+                                                activeOpacity={0.8}
+                                                onPress={()  => onDelete(equipo)}
+                                            >
+                                                <Icon name='close-outline' color='black' size={20} />
+                                            </TouchableOpacity>
+                                        </View>
+
+                                        <View style={styles.allPokemonContainer}>
+                                            {
+                                                <MiniPokemonImage teamName={equipo} />
+                                            }
+                                        </View>
+                                    </TouchableOpacity>
                                 </View>
                             ))
                         )
@@ -165,5 +188,19 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         marginTop: 10
-    }
+    },
+    deleteBtn: {
+        position: 'relative',
+        top: -20,
+        left: 270,
+        zIndex: 9999,
+        backgroundColor: '#FF8E8E',
+        width: 25,
+        height: 25,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 10,
+        borderColor: 'black',
+        borderWidth: 2
+    },
 });
