@@ -1,6 +1,6 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import { useContext } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, Image, ActivityIndicator, Alert } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, ActivityIndicator, Alert, Dimensions } from 'react-native';
 import { PokemonRootStackParams } from '../navigator/PokemonStackNavigator';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -9,6 +9,9 @@ import { usePokemon } from '../hooks/usePokemon';
 import { PokemonDetails } from '../components/PokemonDetails';
 import { PokemonTeamContext } from '../context/PokemonTeamContext';
 
+
+
+const { height: screenHeight } = Dimensions.get('window');
 
 
 interface Props extends StackScreenProps<PokemonRootStackParams, 'PokemonScreen'> { };
@@ -46,7 +49,8 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
         <View style={{ flex: 1 }}>
             <View style={{
                 ...styles.headerContainer,
-                backgroundColor: bgColor
+                backgroundColor: bgColor,
+                height: screenHeight * 0.5
             }}>
 
                 <TouchableOpacity
@@ -81,11 +85,6 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                     {'\n#' + pokemon.id}
                 </Text>
 
-                <Image
-                    source={require('../assets/pokebola-blanca.png')}
-                    style={styles.pokeball}
-                />
-
                 <FadeInImage
                     uri={pokemon.picture}
                     style={styles.pokemonImage}
@@ -109,11 +108,10 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
 
 const styles = StyleSheet.create({
     headerContainer: {
-        height: 370,
         zIndex: 999,
         alignItems: 'center',
         borderBottomRightRadius: 1000,
-        borderBottomLeftRadius: 1000
+        borderBottomLeftRadius: 1000,
     },
     backButton: {
         position: 'absolute',
@@ -127,12 +125,6 @@ const styles = StyleSheet.create({
         fontSize: 40,
         alignSelf: 'flex-start',
         left: 20
-    },
-    pokeball: {
-        width: 250,
-        height: 250,
-        top: 10,
-        opacity: 0.6
     },
     pokemonImage: {
         width: 250,

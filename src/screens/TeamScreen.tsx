@@ -1,5 +1,5 @@
 import { StackScreenProps } from '@react-navigation/stack';
-import { Text, TouchableOpacity, View, StyleSheet, Dimensions, TextInput } from 'react-native';
+import { Text, TouchableOpacity, View, StyleSheet, Dimensions, TextInput, ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { TeamsRootStackParams } from '../navigator/TeamsStackNavigator';
@@ -7,6 +7,7 @@ import { useState, useContext } from 'react';
 import { globalStyles } from '../theme/appTheme';
 import { TeamPokemonCard } from '../components/TeamPokemonCard';
 import { PokemonTeamContext } from '../context/PokemonTeamContext';
+import { Spacer } from '../components/Spacer';
 
 
 
@@ -25,7 +26,7 @@ export const TeamScreen = ({ navigation }: Props) => {
     
 
     return (
-        <View style={{ flex: 1 }}>
+        <ScrollView style={{ flex: 1 }}>
 
             <View style={{
                 ...styles.headerContainer,
@@ -72,7 +73,8 @@ export const TeamScreen = ({ navigation }: Props) => {
                 </TouchableOpacity>
 
             </View>
-        </View>
+            <Spacer />
+        </ScrollView>
     )
 }
 

@@ -34,7 +34,7 @@ export const MiniPokemonImage = ({ teamName }: Props) => {
                     <Image
                         source={{ uri: picture }}
                         key={name + index}
-                        style={{ width: 55, height: 55 }}
+                        style={{ width: 50, height: 60 }}
                     />
                 ))
             }

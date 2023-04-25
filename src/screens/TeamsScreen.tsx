@@ -9,6 +9,7 @@ import { useContext, useEffect, useState } from 'react';
 import { PokemonTeamContext } from '../context/PokemonTeamContext';
 import { PokemonTeam } from '../interfaces/pokemonInterfaces';
 import { MiniPokemonImage } from '../components/MiniPokemonImage';
+import { Spacer } from '../components/Spacer';
 
 
 
@@ -99,7 +100,7 @@ export const TeamsScreen = () => {
 
             </View>
 
-            <View style={{height: 200}}/>
+            <Spacer />
         </ScrollView>
     )
 }
