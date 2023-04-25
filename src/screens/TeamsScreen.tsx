@@ -22,12 +22,13 @@ export const TeamsScreen = () => {
 
     const { getAllTeams, getTeam } = useContext(PokemonTeamContext);
     const [allTeams, setallTeams] = useState<string[]>();
-    const [teamsInfo, setTeamsInfo] = useState<PokemonTeam[]>();
+    const [teamsInfo, setTeamsInfo] = useState<PokemonTeam[]>([]);
 
 
     useEffect(() => {
 
-
+        setallTeams([]);
+        setTeamsInfo([]);
         getAllTeams().then((value) => {
             setallTeams(value);
         })
@@ -37,7 +38,7 @@ export const TeamsScreen = () => {
     useEffect(() => {
         allTeams?.forEach(e => {
             getTeam(e).then((value) => {
-                console.log('EQUIPOS', value)
+                setTeamsInfo([...teamsInfo, value]);
             });
         })
     }, [allTeams])
@@ -79,11 +80,26 @@ export const TeamsScreen = () => {
                 </TouchableOpacity>
 
                 {
-                    (allTeams?.length !== undefined)
+                    (teamsInfo.length !== undefined)
                         ? (
-                            allTeams?.map((equipo, index) => (
-                                <View style={styles.cardContainer} key={equipo + index}>
-                                    <Text style={{ fontSize: 20, color: 'black' }}>{equipo}</Text>
+                            teamsInfo.map((equipo, index) => (
+                                <View style={styles.cardContainer} key={equipo.name + index}>
+                                    <Text style={{ fontSize: 20, color: 'black' }}>
+                                        {equipo.name}
+                                    </Text>
+
+                                    <View style={styles.allPokemonContainer}>
+                                    {
+                                        equipo.pokemons.map(({ name, picture }, index) => (
+                                            <View key={name + index}>
+                                                <Image 
+                                                    source={{ uri: picture }} 
+                                                    style={styles.pokeImg}
+                                                />
+                                            </View>
+                                        ))
+                                    }
+                                    </View>
                                 </View>
                             ))
                         )
@@ -106,7 +122,7 @@ export const TeamsScreen = () => {
 const styles = StyleSheet.create({
     cardContainer: {
         width: '100%',
-        height: 100,
+        height: 120,
         backgroundColor: 'lightgrey',
         marginVertical: 20,
         borderRadius: 20,
@@ -141,5 +157,14 @@ const styles = StyleSheet.create({
         shadowRadius: 5.46,
 
         elevation: 9,
+    },
+    allPokemonContainer: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        marginTop: 10
+    },
+    pokeImg: {
+        width: 55,
+        height: 55
     }
 });
