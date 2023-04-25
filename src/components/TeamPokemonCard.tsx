@@ -11,11 +11,12 @@ import { PokemonCard } from './PokemonCard';
 
 interface Props {
     pokemon?: SimplePokemon;
+    index: number;
 }
 
 type ScreenNavigationProp = StackNavigationProp<TeamsRootStackParams, 'AddPokemonScreen'>;
 
-export const TeamPokemonCard = ({ pokemon }: Props) => {
+export const TeamPokemonCard = ({ pokemon, index }: Props) => {
 
     const navigation = useNavigation<ScreenNavigationProp>();
 
@@ -43,7 +44,7 @@ export const TeamPokemonCard = ({ pokemon }: Props) => {
             <View style={styles.editBtn}>
                 <TouchableOpacity
                     activeOpacity={0.8}
-                    onPress={() => navigation.navigate('AddPokemonScreen', { editMode: true })}
+                    onPress={() => navigation.navigate('AddPokemonScreen', { editMode: true, index })}
                 >
                     <Icon name='pencil-outline' color='black' size={20} />
                 </TouchableOpacity>

@@ -19,7 +19,7 @@ interface Props extends StackScreenProps<PokemonRootStackParams, 'PokemonScreen'
 
 export const PokemonScreen = ({ navigation, route }: Props) => {
 
-    const { bgColor, pokemon, fontColor, addPossible, editPossible } = route.params;
+    const { bgColor, pokemon, fontColor, addPossible, editPossible, editIndex } = route.params;
     const { top } = useSafeAreaInsets();
 
     const { isLoading, pokemon: pokemonInfo } = usePokemon(pokemon.id);
@@ -46,7 +46,7 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
 
     const showAlertEdit = () => {
 
-        editPokemon(0, pokemon);
+        editPokemon(editIndex!, pokemon);
 
         Alert.alert(
             'Pokemon añadido',

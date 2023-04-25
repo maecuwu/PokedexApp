@@ -97,12 +97,12 @@ export const TeamScreen = ({ navigation, route }: Props) => {
                 </View>
 
                 <View style={styles.teamContainer}>
-                    <TeamPokemonCard pokemon={pokemons[0]} />
-                    <TeamPokemonCard pokemon={pokemons[1]} />
-                    <TeamPokemonCard pokemon={pokemons[2]} />
-                    <TeamPokemonCard pokemon={pokemons[3]} />
-                    <TeamPokemonCard pokemon={pokemons[4]} />
-                    <TeamPokemonCard pokemon={pokemons[5]} />
+                    <TeamPokemonCard pokemon={pokemons[0]} index={0}/>
+                    <TeamPokemonCard pokemon={pokemons[1]} index={1}/>
+                    <TeamPokemonCard pokemon={pokemons[2]} index={2}/>
+                    <TeamPokemonCard pokemon={pokemons[3]} index={3}/>
+                    <TeamPokemonCard pokemon={pokemons[4]} index={4}/>
+                    <TeamPokemonCard pokemon={pokemons[5]} index={5}/>
                 </View>
 
                 <TouchableOpacity

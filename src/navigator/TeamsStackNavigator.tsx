@@ -9,7 +9,7 @@ import { SimplePokemon } from '../interfaces/pokemonInterfaces';
 export type TeamsRootStackParams = {
     TeamsScreen: undefined;
     TeamScreen: { pokemonTeam?: string, editMode: boolean };
-    AddPokemonScreen: { editMode: boolean };
+    AddPokemonScreen: { editMode: boolean, index?: number };
     PokemonScreen: { pokemon: SimplePokemon, bgColor: string, fontColor: string, addPossible: boolean, editPossible: boolean };
 }
 

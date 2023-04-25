@@ -21,6 +21,7 @@ interface Props extends StackScreenProps<TeamsRootStackParams, 'AddPokemonScreen
 export const AddPokemonScreen = ({ navigation, route }: Props) => {
 
     const editMode = route.params.editMode;
+    const index = route.params.index;
 
     const { top } = useSafeAreaInsets();
 
@@ -104,7 +105,7 @@ export const AddPokemonScreen = ({ navigation, route }: Props) => {
                     showsVerticalScrollIndicator={false}
                     numColumns={2}
                     renderItem={({ item }) => (
-                        <PokemonCard pokemon={item} addPossible={false} editPossible={true} />
+                        <PokemonCard pokemon={item} addPossible={false} editPossible={true} index={index}/>
                     )}
                 />
             </View>
