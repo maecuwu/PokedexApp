@@ -1,18 +1,12 @@
 import { createContext, useReducer } from 'react'
-import { SimplePokemon } from '../interfaces/pokemonInterfaces';
+import { PokemonTeam, SimplePokemon } from '../interfaces/pokemonInterfaces';
 import { pokemonTeamReducer } from './pokemonTeamReducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-// Definir el contexto
-export interface PokemonTeamState {
-    name: string;
-    pokemons: SimplePokemon[];
-}
-
 
 // Estado inicial
-export const pokemonTeamInitialSate: PokemonTeamState = {
+export const pokemonTeamInitialSate: PokemonTeam = {
     name: 'Equipo sin nombre',
     pokemons: []
 }
@@ -20,11 +14,14 @@ export const pokemonTeamInitialSate: PokemonTeamState = {
 
 // Para decirle a React como es y que expone el context
 type PokemonTeamContextProps = {
-    PokemonTeamState: PokemonTeamState;
+    PokemonTeamState: PokemonTeam;
     addPokemon: (pokemon: SimplePokemon) => boolean;
     removePokemon: () => void;
     changeTeamName: (newName: string) => void;
     editPokemon: () => void;
+    saveTeam: () => void;
+    getTeam: (teamName: string) => Promise<PokemonTeam>;
+    getAllTeams: () => Promise<string[] | undefined>;
 }
 
 
@@ -37,19 +34,15 @@ export const PokemonTeamProvider = ({ children }: any) => {
 
     const [state, dispatch] = useReducer(pokemonTeamReducer, pokemonTeamInitialSate);
 
-
-
     const addPokemon = (pokemon: SimplePokemon) => {
 
         if (state.pokemons.length < 6) {
             dispatch({ type: 'addPokemon', payload: pokemon })
-
-            AsyncStorage.setItem(state.name, JSON.stringify(state));
-
             return true;
         }
 
         return false;
+
     }
 
     const removePokemon = () => {
@@ -64,6 +57,38 @@ export const PokemonTeamProvider = ({ children }: any) => {
 
     }
 
+    const saveTeam = async () => {
+        await AsyncStorage.setItem(state.name, JSON.stringify(state));
+    }
+
+    const getTeam = async (teamName: string) => {
+        try {
+            const value = await AsyncStorage.getItem(teamName)
+            if (value !== null) {
+                return JSON.parse(value);
+            }
+            return;
+        } catch (error) {
+            console.log({ error })
+        }
+    }
+
+    const getAllTeams = async () => {
+
+        let keys: readonly string[] = []
+
+        try {
+
+            keys = await AsyncStorage.getAllKeys()
+            return Array.from(keys);
+
+        } catch (error) {
+            console.log({ error })
+            return;
+        }
+
+    }
+
 
     return (
         <PokemonTeamContext.Provider value={{
@@ -71,7 +96,10 @@ export const PokemonTeamProvider = ({ children }: any) => {
             addPokemon,
             removePokemon,
             changeTeamName,
-            editPokemon
+            editPokemon,
+            saveTeam,
+            getTeam,
+            getAllTeams
         }}>
             {children}
         </PokemonTeamContext.Provider>

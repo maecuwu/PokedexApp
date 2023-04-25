@@ -5,6 +5,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import { TeamsRootStackParams } from '../navigator/TeamsStackNavigator';
+import { useContext, useEffect, useState } from 'react';
+import { PokemonTeamContext } from '../context/PokemonTeamContext';
+import { PokemonTeam } from '../interfaces/pokemonInterfaces';
 
 
 
@@ -16,6 +19,30 @@ export const TeamsScreen = () => {
 
     const { top } = useSafeAreaInsets();
     const navigator = useNavigation<ScreenNavigationProp>();
+
+    const { getAllTeams, getTeam } = useContext(PokemonTeamContext);
+    const [allTeams, setallTeams] = useState<string[]>();
+    const [teamsInfo, setTeamsInfo] = useState<PokemonTeam[]>();
+
+
+    useEffect(() => {
+
+
+        getAllTeams().then((value) => {
+            setallTeams(value);
+        })
+
+    }, [])
+
+    useEffect(() => {
+        allTeams?.forEach(e => {
+            getTeam(e).then((value) => {
+                console.log('EQUIPOS', value)
+            });
+        })
+    }, [allTeams])
+
+
 
     return (
         <>
@@ -30,51 +57,43 @@ export const TeamsScreen = () => {
                 alignItems: 'center'
             }}>
                 <Text style={{
-                        ...globalStyles.title,
-                        ...globalStyles.globalMargin,
-                        color: 'black',
-                        top: top + 20,
-                        marginBottom: 20,
-                        paddingBottom: 10
-                    }}>
-                        Tus equipos
-                    </Text>
+                    ...globalStyles.title,
+                    ...globalStyles.globalMargin,
+                    color: 'black',
+                    top: top + 20,
+                    marginBottom: 20,
+                    paddingBottom: 10
+                }}>
+                    Tus equipos
+                </Text>
 
-                {/* <FlatList 
-                data={}
-                renderItem={}
-                keyExtractor={}
-
-                showsVerticalScrollIndicator={false}
-                ListFooterComponent={
-                    <ActivityIndicator
-                        style={{ height: 100 }}
-                        size={25}
-                        color='grey'
-                    />
-                }
-            /> */}
-
-                <TouchableOpacity 
+                <TouchableOpacity
                     activeOpacity={0.8}
                     onPress={() => navigator.navigate('TeamScreen')}
                 >
                     <View style={styles.newTeamContainer}>
-                        <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}> 
-                            Crear equipo 
+                        <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'black' }}>
+                            Crear equipo
                         </Text>
                     </View>
                 </TouchableOpacity>
 
-                <View style={styles.cardContainer}>
+                {
+                    (allTeams?.length !== undefined)
+                        ? (
+                            allTeams?.map((equipo, index) => (
+                                <View style={styles.cardContainer} key={equipo + index}>
+                                    <Text style={{ fontSize: 20, color: 'black' }}>{equipo}</Text>
+                                </View>
+                            ))
+                        )
+                        : (
+                            <Text style={{ fontSize: 30, marginTop: 100 }}>
+                                No hay equipos creados
+                            </Text>
+                        )
+                }
 
-                </View>
-                <View style={styles.cardContainer}>
-
-                </View>
-                <View style={styles.cardContainer}>
-
-                </View>
 
             </View>
 
@@ -88,11 +107,12 @@ const styles = StyleSheet.create({
     cardContainer: {
         width: '100%',
         height: 100,
-        backgroundColor: 'grey',
+        backgroundColor: 'lightgrey',
         marginVertical: 20,
         borderRadius: 20,
         borderColor: 'black',
         borderWidth: 2,
+        alignItems: 'center',
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -100,7 +120,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.32,
         shadowRadius: 5.46,
-
         elevation: 9,
     },
     newTeamContainer: {

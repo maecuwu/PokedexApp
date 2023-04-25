@@ -1,15 +1,16 @@
-import { Text, View, StyleSheet } from 'react-native';
-import { FullPokemon } from '../interfaces/pokemonInterfaces';
+import { Text, View, StyleSheet, Image } from 'react-native';
+import { FullPokemon, SimplePokemon } from '../interfaces/pokemonInterfaces';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { TeamsRootStackParams } from '../navigator/TeamsStackNavigator';
+import { PokemonCard } from './PokemonCard';
 
 
 
 interface Props {
-    pokemon?: FullPokemon;
+    pokemon?: SimplePokemon;
 }
 
 type ScreenNavigationProp = StackNavigationProp<TeamsRootStackParams, 'AddPokemonScreen'>;
@@ -29,7 +30,7 @@ export const TeamPokemonCard = ({ pokemon }: Props) => {
                         <Icon name='add-outline' color='black' size={20} />
                     </TouchableOpacity>
                 </View>
-                
+
                 <Text style={styles.title}> Sin pokemon </Text>
             </View>
         )
@@ -37,8 +38,8 @@ export const TeamPokemonCard = ({ pokemon }: Props) => {
 
 
     return (
-        <View style={{ ...styles.pokemonContainer, justifyContent: 'center' }}>
-            <View style={styles.addBtn}>
+        <View style={{ ...styles.simplepokemonContainer, justifyContent: 'center', alignItems: 'center' }}>
+            <View style={styles.editBtn}>
                 <TouchableOpacity
                     activeOpacity={0.8}
                 >
@@ -46,14 +47,14 @@ export const TeamPokemonCard = ({ pokemon }: Props) => {
                 </TouchableOpacity>
             </View>
 
-            <Text style={styles.title}> {pokemon.name} </Text>
+            <PokemonCard pokemon={pokemon} addPossible={false} />
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     pokemonContainer: {
-        width: '40%',
+        width: '45%',
         height: 100,
         backgroundColor: 'lightgrey',
         marginLeft: 10,
@@ -69,6 +70,12 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.32,
         shadowRadius: 5.46,
         elevation: 9,
+    },
+    simplepokemonContainer: {
+        width: '45%',
+        height: 100,
+        marginLeft: 10,
+        marginBottom: 50,
     },
     title: {
         fontSize: 20,
@@ -91,8 +98,8 @@ const styles = StyleSheet.create({
     },
     editBtn: {
         position: 'relative',
-        top: -12,
-        left: 100,
+        top: 35,
+        left: 55,
         zIndex: 999,
         backgroundColor: 'lightblue',
         width: 25,

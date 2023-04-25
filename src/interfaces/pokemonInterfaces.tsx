@@ -191,3 +191,8 @@ export interface Type {
     slot: number;
     type: Species;
 }
+
+export interface PokemonTeam {
+    name: string;
+    pokemons: SimplePokemon[];
+}

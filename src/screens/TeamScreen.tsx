@@ -3,9 +3,10 @@ import { Text, TouchableOpacity, View, StyleSheet, Dimensions, TextInput } from 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { TeamsRootStackParams } from '../navigator/TeamsStackNavigator';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { globalStyles } from '../theme/appTheme';
 import { TeamPokemonCard } from '../components/TeamPokemonCard';
+import { PokemonTeamContext } from '../context/PokemonTeamContext';
 
 
 
@@ -20,7 +21,9 @@ export const TeamScreen = ({ navigation }: Props) => {
 
     const { top } = useSafeAreaInsets();
 
-    const [teamName, setTeamName] = useState('');
+    const { PokemonTeamState: {name, pokemons}, saveTeam, changeTeamName, getTeam } = useContext(PokemonTeamContext);
+    
+    getTeam();
 
     return (
         <View style={{ flex: 1 }}>
@@ -47,23 +50,24 @@ export const TeamScreen = ({ navigation }: Props) => {
                         style={styles.textInput}
                         autoCapitalize='none'
                         autoCorrect={false}
-                        value={teamName}
-                        onChangeText={setTeamName}
+                        value={name}
+                        onChangeText={(value) => changeTeamName(value)}
                     />
                 </View>
 
                 <View style={styles.teamContainer}>
-                    <TeamPokemonCard />
-                    <TeamPokemonCard />
-                    <TeamPokemonCard />
-                    <TeamPokemonCard />
-                    <TeamPokemonCard />
-                    <TeamPokemonCard />
+                    <TeamPokemonCard pokemon={pokemons[0]}/>
+                    <TeamPokemonCard pokemon={pokemons[1]}/>
+                    <TeamPokemonCard pokemon={pokemons[2]}/>
+                    <TeamPokemonCard pokemon={pokemons[3]}/>
+                    <TeamPokemonCard pokemon={pokemons[4]}/>
+                    <TeamPokemonCard pokemon={pokemons[5]}/>
                 </View>
 
                 <TouchableOpacity
                     activeOpacity={0.8}
                     style={styles.saveBtn}
+                    onPress={saveTeam}
                 >
                     <Text style={{ ...globalStyles.title, color: 'black', fontSize: 20 }}> Guardar </Text>
                 </TouchableOpacity>
@@ -114,7 +118,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flexWrap: 'wrap',
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     saveBtn: {
         marginTop: 30,

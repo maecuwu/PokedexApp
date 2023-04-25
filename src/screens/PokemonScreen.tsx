@@ -27,7 +27,7 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
         if (addPokemon(pokemon)) {
             Alert.alert(
                 'Pokemon añadido',
-                'Pokemon añadido a tu equipo',
+                `${pokemon.name} añadido a tu equipo`,
                 [
                     { text: 'OK' },
                 ]);
