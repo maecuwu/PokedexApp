@@ -69,7 +69,9 @@ export const TeamScreen = ({ navigation }: Props) => {
                     style={styles.saveBtn}
                     onPress={saveTeam}
                 >
-                    <Text style={{ ...globalStyles.title, color: 'black', fontSize: 20 }}> Guardar </Text>
+                    <Text style={{ ...globalStyles.title, color: 'black', fontSize: 20 }}> 
+                        Guardar 
+                    </Text>
                 </TouchableOpacity>
 
             </View>

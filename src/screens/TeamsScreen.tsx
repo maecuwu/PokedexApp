@@ -1,4 +1,4 @@
-import { Image, Text, View, ActivityIndicator, FlatList, TouchableOpacity, ScrollView } from 'react-native';
+import { Image, Text, View, ActivityIndicator, FlatList, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { globalStyles } from '../theme/appTheme';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -23,24 +23,39 @@ export const TeamsScreen = () => {
     const navigator = useNavigation<ScreenNavigationProp>();
 
     const { getAllTeams, getTeam } = useContext(PokemonTeamContext);
+
+    const [refreshing, setRefreshing] = useState(false);
     const [allTeams, setallTeams] = useState<string[]>();
-    const [teamsInfo, setTeamsInfo] = useState<PokemonTeam[]>([]);
 
 
     useEffect(() => {
-
-        setallTeams([]);
-        setTeamsInfo([]);
-        getAllTeams().then((value) => {
-            setallTeams(value);
-        })
-
+        getTeams();
     }, [])
 
+    const getTeams = async() => {
 
+        setRefreshing(true);
+
+        setallTeams([]);
+        const teams = await getAllTeams();
+        setallTeams(teams);
+
+        setRefreshing(false);
+    }
 
     return (
-        <ScrollView>
+        <ScrollView
+            refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={getTeams}
+                    progressViewOffset={200}
+                    colors={[
+                        'red', 'lightgreen', 'black'
+                    ]}
+                />
+            }
+        >
 
             <Image
                 source={require('../assets/pokebola.png')}
@@ -83,9 +98,9 @@ export const TeamsScreen = () => {
                                     </Text>
 
                                     <View style={styles.allPokemonContainer}>
-                                    {
-                                        <MiniPokemonImage teamName={equipo}/>
-                                    }
+                                        {
+                                            <MiniPokemonImage teamName={equipo} />
+                                        }
                                     </View>
                                 </View>
                             ))
