@@ -23,7 +23,7 @@ export const PokemonDetails = ({ pokemon, color }: Props) => {
                     {
                         pokemon.types.map(({ type }) => (
                             <Text key={type.name}
-                            style={{ ...styles.regularText, marginRight: 10 }}> {type.name} </Text>
+                                style={{ ...styles.regularText, marginRight: 10 }}> {type.name} </Text>
                         ))
                     }
                 </View>
@@ -38,10 +38,22 @@ export const PokemonDetails = ({ pokemon, color }: Props) => {
             </View>
 
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                <FadeInImage uri={pokemon.sprites.front_default} style={styles.basicSprite}/>
-                <FadeInImage uri={pokemon.sprites.back_default} style={styles.basicSprite}/>
-                <FadeInImage uri={pokemon.sprites.front_shiny} style={styles.basicSprite}/>
-                <FadeInImage uri={pokemon.sprites.back_shiny} style={styles.basicSprite}/>
+                {
+                    (pokemon.sprites.front_default) &&
+                    <FadeInImage uri={pokemon.sprites.front_default} style={styles.basicSprite} />
+                }
+                {
+                    (pokemon.sprites.back_default) &&
+                    <FadeInImage uri={pokemon.sprites.back_default} style={styles.basicSprite} />
+                }
+                {
+                    (pokemon.sprites.front_shiny) &&
+                    <FadeInImage uri={pokemon.sprites.front_shiny} style={styles.basicSprite} />
+                }
+                {
+                    (pokemon.sprites.back_shiny) &&
+                    <FadeInImage uri={pokemon.sprites.back_shiny} style={styles.basicSprite} />
+                }
             </ScrollView>
 
             {/* HABILIDADES */}
@@ -75,10 +87,10 @@ export const PokemonDetails = ({ pokemon, color }: Props) => {
                 <Text style={styles.title}>ESTADÍSTICAS</Text>
                 <View>
                     {
-                        pokemon.stats.map(( stat ) => (
-                            <View style={{flexDirection: 'row'}} key={stat.stat.name}>
+                        pokemon.stats.map((stat) => (
+                            <View style={{ flexDirection: 'row' }} key={stat.stat.name}>
                                 <Text style={{ ...styles.regularText, marginRight: 10 }}> {stat.stat.name} </Text>
-                                <View style={{...styles.statBar, width: stat.base_stat, backgroundColor: color}}></View>
+                                <View style={{ ...styles.statBar, width: stat.base_stat, backgroundColor: color }}></View>
                                 <Text style={{ ...styles.regularText, fontWeight: 'bold' }}> {stat.base_stat} </Text>
                             </View>
                         ))
@@ -87,8 +99,8 @@ export const PokemonDetails = ({ pokemon, color }: Props) => {
             </View>
 
             {/* FINAL DE PAGINA */}
-            <View style={{...styles.container, marginTop: 20, alignItems: 'center', marginBottom: 50}}>
-                <FadeInImage uri={pokemon.sprites.front_default} style={styles.basicSprite}/>
+            <View style={{ ...styles.container, marginTop: 20, alignItems: 'center', marginBottom: 50 }}>
+                <FadeInImage uri={pokemon.sprites.front_default} style={styles.basicSprite} />
             </View>
 
         </ScrollView>
@@ -114,6 +126,6 @@ const styles = StyleSheet.create({
     },
     statBar: {
         height: 10,
-        top: 9        
+        top: 9
     }
 })
