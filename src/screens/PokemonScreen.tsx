@@ -1,9 +1,11 @@
-import { StackScreenProps } from '@react-navigation/stack';
 import { useContext } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, Image, ActivityIndicator, Alert, Dimensions } from 'react-native';
-import { PokemonRootStackParams } from '../navigator/PokemonStackNavigator';
+import { Text, View, StyleSheet, TouchableOpacity, ActivityIndicator, Alert, Dimensions } from 'react-native';
+
+import { StackScreenProps } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { PokemonRootStackParams } from '../navigator/PokemonStackNavigator';
 import { FadeInImage } from '../components/FadeInImage';
 import { usePokemon } from '../hooks/usePokemon';
 import { PokemonDetails } from '../components/PokemonDetails';

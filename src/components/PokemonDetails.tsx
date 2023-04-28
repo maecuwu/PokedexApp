@@ -1,7 +1,6 @@
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, ScrollView } from 'react-native';
+
 import { FullPokemon } from '../interfaces/pokemonInterfaces';
-import { ScrollView } from 'react-native-gesture-handler';
-import { globalStyles } from '../theme/appTheme';
 import { FadeInImage } from './FadeInImage';
 
 

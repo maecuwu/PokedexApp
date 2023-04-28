@@ -1,16 +1,17 @@
-import { StyleSheet } from 'react-native';
-import { Text, View, FlatList, Dimensions, TouchableOpacity } from 'react-native';
+import { useState, useEffect } from 'react';
+import { Text, View, FlatList, Dimensions, TouchableOpacity,  StyleSheet } from 'react-native';
+
+import { StackScreenProps } from '@react-navigation/stack';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Icon from 'react-native-vector-icons/Ionicons';
+
 import { SearchInput } from '../components/SearchInput';
 import { globalStyles } from '../theme/appTheme';
 import { usePokemonSearch } from '../hooks/usePokemonSearch';
 import { PokemonCard } from '../components/PokemonCard';
 import { LoadingComponent } from '../components/LoadingComponent';
-import { useState, useEffect } from 'react';
 import { SimplePokemon } from '../interfaces/pokemonInterfaces';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { TeamsRootStackParams } from '../navigator/TeamsStackNavigator';
-import { StackScreenProps } from '@react-navigation/stack';
 
 
 const { width: screenWidth } = Dimensions.get('window');

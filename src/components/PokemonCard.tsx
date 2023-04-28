@@ -1,11 +1,13 @@
+import { useEffect, useState, useRef } from 'react';
 import { Dimensions, View, TouchableOpacity, StyleSheet, Text, Image } from 'react-native';
+
+import ImageColors from 'react-native-image-colors'
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+import { PokemonRootStackParams } from '../navigator/PokemonStackNavigator';
 import { SimplePokemon } from '../interfaces/pokemonInterfaces';
 import { FadeInImage } from './FadeInImage';
-import { useEffect, useState, useRef } from 'react';
-import ImageColors from 'react-native-image-colors'
-import { CommonActions, useNavigation } from '@react-navigation/native';
-import { PokemonRootStackParams } from '../navigator/PokemonStackNavigator';
-import { StackNavigationProp } from '@react-navigation/stack';
 
 
 const { width: windowWidth } = Dimensions.get('window');

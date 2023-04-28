@@ -1,8 +1,9 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import Icon from 'react-native-vector-icons/Ionicons'
+
 import { PokemonStackNavigator } from './PokemonStackNavigator';
 import { SearchScreen } from '../screens/SearchScreen';
-import Icon from 'react-native-vector-icons/Ionicons'
-import { TeamsScreen } from '../screens/TeamsScreen';
 import { TeamsStackNavigator } from './TeamsStackNavigator';
 
 const Tab = createBottomTabNavigator();

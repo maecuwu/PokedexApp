@@ -1,9 +1,11 @@
-import { StackScreenProps } from '@react-navigation/stack';
+import { useState, useContext, useEffect } from 'react';
 import { Text, TouchableOpacity, View, StyleSheet, Dimensions, TextInput, ScrollView } from 'react-native';
+
+import { StackScreenProps } from '@react-navigation/stack';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
+
 import { TeamsRootStackParams } from '../navigator/TeamsStackNavigator';
-import { useState, useContext, useEffect } from 'react';
 import { globalStyles } from '../theme/appTheme';
 import { TeamPokemonCard } from '../components/TeamPokemonCard';
 import { PokemonTeamContext } from '../context/PokemonTeamContext';
@@ -51,8 +53,6 @@ export const TeamScreen = ({ navigation, route }: Props) => {
     }, [])
 
     useEffect(() => {
-
-        console.log(modalVisible)
 
         if (modalVisible == true && editMode){
             const exportString = `            

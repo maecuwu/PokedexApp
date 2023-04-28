@@ -1,15 +1,16 @@
-import { Image, Text, View, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
-import { StyleSheet } from 'react-native';
-import { globalStyles } from '../theme/appTheme';
+import { useContext, useEffect, useState } from 'react';
+import { Image, Text, View, TouchableOpacity, ScrollView, RefreshControl, StyleSheet } from 'react-native';
+
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Ionicons';
+
+import { globalStyles } from '../theme/appTheme';
 import { TeamsRootStackParams } from '../navigator/TeamsStackNavigator';
-import { useContext, useEffect, useState } from 'react';
 import { PokemonTeamContext } from '../context/PokemonTeamContext';
 import { MiniPokemonImage } from '../components/MiniPokemonImage';
 import { Spacer } from '../components/Spacer';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 
 

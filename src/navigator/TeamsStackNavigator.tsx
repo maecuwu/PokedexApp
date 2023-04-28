@@ -1,10 +1,10 @@
 import { createStackNavigator } from '@react-navigation/stack';
+
 import { TeamScreen } from '../screens/TeamScreen';
 import { TeamsScreen } from '../screens/TeamsScreen';
 import { AddPokemonScreen } from '../screens/AddPokemonScreen';
 import { PokemonScreen } from '../screens/PokemonScreen';
 import { SimplePokemon } from '../interfaces/pokemonInterfaces';
-import { ImportScreen } from '../screens/ImportScreen';
 
 
 export type TeamsRootStackParams = {

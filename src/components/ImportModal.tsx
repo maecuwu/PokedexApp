@@ -1,14 +1,16 @@
 import { useEffect, useState, useContext } from 'react';
 import { Button, Modal, Text, View, Dimensions, TouchableOpacity, StyleSheet, ScrollView, TextInput } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { useForm } from '../hooks/useForm';
-import { Koffing } from 'koffing';
-import { PokemonTeamContext } from '../context/PokemonTeamContext';
-import { SimplePokemon } from '../interfaces/pokemonInterfaces';
-import { pokemonApi } from '../api/pokemonApi';
+
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { Koffing } from 'koffing';
+
 import { TeamsRootStackParams } from '../navigator/TeamsStackNavigator';
+import { pokemonApi } from '../api/pokemonApi';
+import { SimplePokemon } from '../interfaces/pokemonInterfaces';
+import { PokemonTeamContext } from '../context/PokemonTeamContext';
+import { useForm } from '../hooks/useForm';
 
 
 
@@ -93,7 +95,7 @@ export const ImportModal = ({ title, visibleLoad, onRedraw }: Props) => {
                 <View style={{
                     backgroundColor: 'white',
                     width: screenWidth * 0.9,
-                    height: screenHeight * 0.7,
+                    height: screenHeight * 0.5,
                     justifyContent: 'center',
                     alignItems: 'center',
                     shadowOffset: {

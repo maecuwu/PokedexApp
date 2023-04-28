@@ -1,11 +1,13 @@
+import { useState, useEffect } from 'react';
 import { Text, View, FlatList, Dimensions } from 'react-native';
+
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 import { SearchInput } from '../components/SearchInput';
 import { globalStyles } from '../theme/appTheme';
 import { usePokemonSearch } from '../hooks/usePokemonSearch';
 import { PokemonCard } from '../components/PokemonCard';
 import { LoadingComponent } from '../components/LoadingComponent';
-import { useState, useEffect } from 'react';
 import { SimplePokemon } from '../interfaces/pokemonInterfaces';
 
 

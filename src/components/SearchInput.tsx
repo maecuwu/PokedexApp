@@ -1,6 +1,8 @@
-import { Text, View, StyleSheet, TextInput, ViewStyle, StyleProp } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { useState, useEffect } from 'react';
+import { View, StyleSheet, TextInput, ViewStyle, StyleProp } from 'react-native';
+
+import Icon from 'react-native-vector-icons/Ionicons';
+
 import { useDebounce } from '../hooks/useDebounce';
 
 

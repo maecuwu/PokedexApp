@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Button, Modal, Text, View, Dimensions, TouchableOpacity, StyleSheet } from 'react-native';
+import { Button, Modal, Text, View, Dimensions, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+
 import Icon from 'react-native-vector-icons/Ionicons';
 import Clipboard from '@react-native-clipboard/clipboard';
 
@@ -47,7 +48,7 @@ export const ExportModal = ({ bodyText, title, visibleLoad, onRedraw }: Props) =
             visible={!visible}
             transparent={true}
         >
-            <View style={{
+            <ScrollView contentContainerStyle={{
                 flex: 1,
                 backgroundColor: 'rgba(0, 0, 0, 0.5)',
                 justifyContent: 'center',
@@ -56,7 +57,7 @@ export const ExportModal = ({ bodyText, title, visibleLoad, onRedraw }: Props) =
                 <View style={{
                     backgroundColor: 'white',
                     width: screenWidth * 0.9,
-                    height: screenHeight * 0.7,
+                    height: screenHeight * 0.9,
                     justifyContent: 'center',
                     alignItems: 'center',
                     shadowOffset: {
@@ -104,7 +105,7 @@ export const ExportModal = ({ bodyText, title, visibleLoad, onRedraw }: Props) =
                     }
                 </View>
 
-            </View>
+            </ScrollView>
 
         </Modal>
     )
