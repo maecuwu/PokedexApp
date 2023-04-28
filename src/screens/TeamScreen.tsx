@@ -8,6 +8,7 @@ import { globalStyles } from '../theme/appTheme';
 import { TeamPokemonCard } from '../components/TeamPokemonCard';
 import { PokemonTeamContext } from '../context/PokemonTeamContext';
 import { Spacer } from '../components/Spacer';
+import { ExportModal } from '../components/ExportModal';
 
 
 
@@ -26,6 +27,8 @@ export const TeamScreen = ({ navigation, route }: Props) => {
     const { top } = useSafeAreaInsets();
 
     const [nameChanged, setNameChanged] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [exportString, setExportString] = useState('');
 
     const { saveTeam, changeTeamName, getTeam, changeTeamPokemons, deleteTeam, editPokemon } = useContext(PokemonTeamContext);
     let { PokemonTeam: { name, pokemons } } = useContext(PokemonTeamContext);
@@ -46,6 +49,35 @@ export const TeamScreen = ({ navigation, route }: Props) => {
 
     }, [])
 
+    useEffect(() => {
+
+        console.log(modalVisible)
+
+        if (modalVisible == true){
+            const exportString = `            
+            ${pokemons[0]?.name.charAt(0).toLocaleUpperCase() + pokemons[0].name.substring(1, 100)}
+            Level 100
+    
+            ${pokemons[1]?.name.charAt(0).toLocaleUpperCase() + pokemons[1].name.substring(1, 100)}
+            Level 100
+    
+            ${pokemons[2]?.name.charAt(0).toLocaleUpperCase() + pokemons[2].name.substring(1, 100)}
+            Level 100
+    
+            ${pokemons[3]?.name.charAt(0).toLocaleUpperCase() + pokemons[3].name.substring(1, 100)}
+            Level 100
+    
+            ${pokemons[4]?.name.charAt(0).toLocaleUpperCase() + pokemons[4].name.substring(1, 100)}
+            Level 100
+    
+            ${pokemons[5]?.name.charAt(0).toLocaleUpperCase() + pokemons[5].name.substring(1, 100)}
+            Level 100`
+    
+            setExportString(exportString);
+        }
+    }, [modalVisible])
+    
+
     const onChangeTeamName = (name: string) => {
         changeTeamName(name);
         setNameChanged(true);
@@ -64,7 +96,6 @@ export const TeamScreen = ({ navigation, route }: Props) => {
         saveTeam();
         navigation.navigate('TeamsScreen');
     }
-
 
     return (
         <ScrollView style={{ flex: 1 }}>
@@ -96,13 +127,49 @@ export const TeamScreen = ({ navigation, route }: Props) => {
                     />
                 </View>
 
+                {
+                    (editMode)
+                        ? (
+                            <>
+                                <TouchableOpacity
+                                    activeOpacity={0.8}
+                                    style={{ ...styles.saveBtn, backgroundColor: 'orange' }}
+                                    onPress={() => setModalVisible(!modalVisible)}
+                                >
+                                    <Text style={{ ...globalStyles.title, color: 'black', fontSize: 20 }}>
+                                        Exportar
+                                    </Text>
+                                </TouchableOpacity>
+
+                                <ExportModal
+                                    bodyText={exportString}
+                                    title='Exportar equipo a Pokemon Showdown'
+                                    visibleLoad={modalVisible}
+                                    onRedraw={modalVisible}
+                                />
+                            </>
+                        )
+                        : (
+                            <TouchableOpacity
+                                activeOpacity={0.8}
+                                style={{ ...styles.saveBtn, backgroundColor: 'orange' }}
+                                onPress={() => navigation.navigate('ImportScreen', { importMode: true })}
+                            >
+                                <Text style={{ ...globalStyles.title, color: 'black', fontSize: 20 }}>
+                                    Importar
+                                </Text>
+                            </TouchableOpacity>
+                        )
+                }
+
+
                 <View style={styles.teamContainer}>
-                    <TeamPokemonCard pokemon={pokemons[0]} index={0}/>
-                    <TeamPokemonCard pokemon={pokemons[1]} index={1}/>
-                    <TeamPokemonCard pokemon={pokemons[2]} index={2}/>
-                    <TeamPokemonCard pokemon={pokemons[3]} index={3}/>
-                    <TeamPokemonCard pokemon={pokemons[4]} index={4}/>
-                    <TeamPokemonCard pokemon={pokemons[5]} index={5}/>
+                    <TeamPokemonCard pokemon={pokemons[0]} index={0} />
+                    <TeamPokemonCard pokemon={pokemons[1]} index={1} />
+                    <TeamPokemonCard pokemon={pokemons[2]} index={2} />
+                    <TeamPokemonCard pokemon={pokemons[3]} index={3} />
+                    <TeamPokemonCard pokemon={pokemons[4]} index={4} />
+                    <TeamPokemonCard pokemon={pokemons[5]} index={5} />
                 </View>
 
                 <TouchableOpacity
