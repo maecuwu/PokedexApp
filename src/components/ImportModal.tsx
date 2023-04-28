@@ -126,10 +126,15 @@ export const ImportModal = ({ title, visibleLoad, onRedraw }: Props) => {
                         <Icon name='close-circle-outline' color='red' size={30} />
                     </TouchableOpacity>
 
-                    <Button
-                        title='Importar'
-                        onPress={onImport}
-                    />
+                    <TouchableOpacity
+                        activeOpacity={0.8}
+                        onPress={() => onImport}
+                        style={styles.importBtn}
+                    >
+                        <Text style={{fontSize: 18, color: 'black'}}>
+                            Importar
+                        </Text>
+                    </TouchableOpacity>
 
                 </View>
 
@@ -153,5 +158,15 @@ const styles = StyleSheet.create({
         height: 50,
         width: '100%',
         marginVertical: 30,
+    },
+    importBtn: {
+        borderRadius: 20,
+        borderWidth: 2,
+        borderColor: 'black',
+        width: 100,
+        height: 40,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'lightblue'
     }
 });

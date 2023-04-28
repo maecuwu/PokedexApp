@@ -57,23 +57,23 @@ export const TeamScreen = ({ navigation, route }: Props) => {
 
         if (modalVisible == true && editMode) {
             const exportString = `            
-            ${pokemons[0]?.name.charAt(0).toLocaleUpperCase() + pokemons[0].name.substring(1, 100)}
-            Level 100
+    ${pokemons[0]?.name.charAt(0).toLocaleUpperCase() + pokemons[0].name.substring(1, 100)}
+    Level 100
     
-            ${pokemons[1]?.name.charAt(0).toLocaleUpperCase() + pokemons[1].name.substring(1, 100)}
-            Level 100
+    ${pokemons[1]?.name.charAt(0).toLocaleUpperCase() + pokemons[1].name.substring(1, 100)}
+    Level 100
     
-            ${pokemons[2]?.name.charAt(0).toLocaleUpperCase() + pokemons[2].name.substring(1, 100)}
-            Level 100
+    ${pokemons[2]?.name.charAt(0).toLocaleUpperCase() + pokemons[2].name.substring(1, 100)}
+    Level 100
     
-            ${pokemons[3]?.name.charAt(0).toLocaleUpperCase() + pokemons[3].name.substring(1, 100)}
-            Level 100
+    ${pokemons[3]?.name.charAt(0).toLocaleUpperCase() + pokemons[3].name.substring(1, 100)}
+    Level 100
     
-            ${pokemons[4]?.name.charAt(0).toLocaleUpperCase() + pokemons[4].name.substring(1, 100)}
-            Level 100
+    ${pokemons[4]?.name.charAt(0).toLocaleUpperCase() + pokemons[4].name.substring(1, 100)}
+    Level 100
     
-            ${pokemons[5]?.name.charAt(0).toLocaleUpperCase() + pokemons[5].name.substring(1, 100)}
-            Level 100`
+    ${pokemons[5]?.name.charAt(0).toLocaleUpperCase() + pokemons[5].name.substring(1, 100)}
+    Level 100`
 
             setExportString(exportString);
         }

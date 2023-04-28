@@ -68,20 +68,29 @@ export const ExportModal = ({ bodyText, title, visibleLoad, onRedraw }: Props) =
                     elevation: 12,
                     borderRadius: 15,
                     borderColor: 'black',
+                    borderWidth: 1,
                     paddingHorizontal: 20
                 }}>
-                    <Text style={{ fontSize: 20, color: 'black', textAlign: 'center' }}>
-                        {title}
-                    </Text>
 
-                    <Text style={{ fontSize: 16, marginBottom: 20, marginTop: 10, color: 'black' }}>
-                        {bodyText}
-                    </Text>
+                    <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
+                        <Text style={{ fontSize: 20, color: 'black', textAlign: 'center' }}>
+                            {title}
+                        </Text>
 
-                    <Button
-                        title='Cerrar'
+                        <Text style={{ fontSize: 16, marginBottom: 20, marginTop: 10, color: 'black' }}>
+                            {bodyText}
+                        </Text>
+                    </View>
+
+                    <TouchableOpacity
+                        activeOpacity={0.8}
                         onPress={() => setVisible(!visible)}
-                    />
+                        style={styles.closeBtn}
+                    >
+                        <Text style={{fontSize: 18, color: 'black'}}>
+                            Cerrar
+                        </Text>
+                    </TouchableOpacity>
 
                     {
                         (copied)
@@ -117,5 +126,16 @@ const styles = StyleSheet.create({
         zIndex: 999,
         top: 20,
         right: 10
+    },
+    closeBtn: {
+        marginBottom: 30,
+        borderRadius: 20,
+        borderWidth: 2,
+        borderColor: 'black',
+        width: 100,
+        height: 40,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'lightblue'
     }
 });
