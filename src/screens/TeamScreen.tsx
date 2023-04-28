@@ -9,6 +9,7 @@ import { TeamPokemonCard } from '../components/TeamPokemonCard';
 import { PokemonTeamContext } from '../context/PokemonTeamContext';
 import { Spacer } from '../components/Spacer';
 import { ExportModal } from '../components/ExportModal';
+import { ImportModal } from '../components/ImportModal';
 
 
 
@@ -53,7 +54,7 @@ export const TeamScreen = ({ navigation, route }: Props) => {
 
         console.log(modalVisible)
 
-        if (modalVisible == true){
+        if (modalVisible == true && editMode){
             const exportString = `            
             ${pokemons[0]?.name.charAt(0).toLocaleUpperCase() + pokemons[0].name.substring(1, 100)}
             Level 100
@@ -150,15 +151,23 @@ export const TeamScreen = ({ navigation, route }: Props) => {
                             </>
                         )
                         : (
-                            <TouchableOpacity
-                                activeOpacity={0.8}
-                                style={{ ...styles.saveBtn, backgroundColor: 'orange' }}
-                                onPress={() => navigation.navigate('ImportScreen', { importMode: true })}
-                            >
-                                <Text style={{ ...globalStyles.title, color: 'black', fontSize: 20 }}>
-                                    Importar
-                                </Text>
-                            </TouchableOpacity>
+                            <>
+                                <TouchableOpacity
+                                    activeOpacity={0.8}
+                                    style={{ ...styles.saveBtn, backgroundColor: 'orange' }}
+                                    onPress={() => setModalVisible(!modalVisible)}
+                                >
+                                    <Text style={{ ...globalStyles.title, color: 'black', fontSize: 20 }}>
+                                        Importar
+                                    </Text>
+                                </TouchableOpacity>
+
+                                <ImportModal 
+                                    title='Importar equipo desde Pokemon Showdown'
+                                    visibleLoad={modalVisible}
+                                    onRedraw={modalVisible}                                
+                                />
+                            </>
                         )
                 }
 
