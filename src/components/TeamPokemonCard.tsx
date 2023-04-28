@@ -39,7 +39,6 @@ export const TeamPokemonCard = ({ pokemon, index }: Props) => {
         )
     }
 
-
     return (
         <View style={{ ...styles.simplepokemonContainer, justifyContent: 'center', alignItems: 'center' }}>
             <View style={styles.editBtn}>
@@ -51,7 +50,7 @@ export const TeamPokemonCard = ({ pokemon, index }: Props) => {
                 </TouchableOpacity>
             </View>
 
-            <PokemonCard pokemon={pokemon} addPossible={false} editPossible={true} />
+            <PokemonCard pokemon={pokemon} addPossible={false} editPossible={false} />
         </View>
     )
 }

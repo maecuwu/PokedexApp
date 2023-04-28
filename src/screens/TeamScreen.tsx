@@ -12,6 +12,7 @@ import { PokemonTeamContext } from '../context/PokemonTeamContext';
 import { Spacer } from '../components/Spacer';
 import { ExportModal } from '../components/ExportModal';
 import { ImportModal } from '../components/ImportModal';
+import { useIsFocused } from '@react-navigation/native';
 
 
 
@@ -54,7 +55,7 @@ export const TeamScreen = ({ navigation, route }: Props) => {
 
     useEffect(() => {
 
-        if (modalVisible == true && editMode){
+        if (modalVisible == true && editMode) {
             const exportString = `            
             ${pokemons[0]?.name.charAt(0).toLocaleUpperCase() + pokemons[0].name.substring(1, 100)}
             Level 100
@@ -73,11 +74,11 @@ export const TeamScreen = ({ navigation, route }: Props) => {
     
             ${pokemons[5]?.name.charAt(0).toLocaleUpperCase() + pokemons[5].name.substring(1, 100)}
             Level 100`
-    
+
             setExportString(exportString);
         }
     }, [modalVisible])
-    
+
 
     const onChangeTeamName = (name: string) => {
         changeTeamName(name);
@@ -162,10 +163,10 @@ export const TeamScreen = ({ navigation, route }: Props) => {
                                     </Text>
                                 </TouchableOpacity>
 
-                                <ImportModal 
+                                <ImportModal
                                     title='Importar equipo desde Pokemon Showdown'
                                     visibleLoad={modalVisible}
-                                    onRedraw={modalVisible}                                
+                                    onRedraw={modalVisible}
                                 />
                             </>
                         )

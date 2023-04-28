@@ -38,7 +38,7 @@ export const PokemonCard = ({ pokemon, addPossible, editPossible, index }: Props
 
                 if (colors.platform === 'android') {
                     setBgColor(colors.dominant || 'grey')
-                    setFontColor(colors.darkMuted || 'white');
+                    setFontColor(colors.average || 'white');
                 }
             },
         );
@@ -46,7 +46,7 @@ export const PokemonCard = ({ pokemon, addPossible, editPossible, index }: Props
         return () => {
             isMounted.current = false;
         }
-    }, []);
+    }, [pokemon]);
 
     return (
         <TouchableOpacity 

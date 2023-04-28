@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Text, View, FlatList, Dimensions, TouchableOpacity,  StyleSheet } from 'react-native';
+import { useState, useEffect, useContext } from 'react';
+import { Text, View, FlatList, Dimensions, TouchableOpacity, StyleSheet } from 'react-native';
 
 import { StackScreenProps } from '@react-navigation/stack';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -12,6 +12,7 @@ import { PokemonCard } from '../components/PokemonCard';
 import { LoadingComponent } from '../components/LoadingComponent';
 import { SimplePokemon } from '../interfaces/pokemonInterfaces';
 import { TeamsRootStackParams } from '../navigator/TeamsStackNavigator';
+import { PokemonTeamContext } from '../context/PokemonTeamContext';
 
 
 const { width: screenWidth } = Dimensions.get('window');
@@ -23,6 +24,8 @@ export const AddPokemonScreen = ({ navigation, route }: Props) => {
 
     const editMode = route.params.editMode;
     const index = route.params.index;
+
+    const { PokemonTeam } = useContext(PokemonTeamContext);
 
     const { top } = useSafeAreaInsets();
 
@@ -62,20 +65,20 @@ export const AddPokemonScreen = ({ navigation, route }: Props) => {
     }
 
 
-    if (editMode){
+    if (editMode) {
         return (
             <View style={{ flex: 1, marginHorizontal: 20 }}>
-    
+
                 <TouchableOpacity
                     activeOpacity={0.7}
                     style={{ ...styles.backButton, top: top + 10 }}
                     onPress={() => navigation.goBack()}
                 >
-    
+
                     <Icon name='arrow-back-outline' color='black' size={35} />
-    
+
                 </TouchableOpacity>
-    
+
                 <SearchInput
                     onDebounce={(value) => setSearchString(value)}
                     style={{
@@ -85,7 +88,7 @@ export const AddPokemonScreen = ({ navigation, route }: Props) => {
                         top: top + 60
                     }}
                 />
-    
+
                 <FlatList
                     ListHeaderComponent={
                         <Text style={{
@@ -100,13 +103,13 @@ export const AddPokemonScreen = ({ navigation, route }: Props) => {
                             {searchString}
                         </Text>
                     }
-    
+
                     data={pokemonFiltered}
                     keyExtractor={(pokemon) => pokemon.id}
                     showsVerticalScrollIndicator={false}
                     numColumns={2}
                     renderItem={({ item }) => (
-                        <PokemonCard pokemon={item} addPossible={false} editPossible={true} index={index}/>
+                        <PokemonCard pokemon={item} addPossible={false} editPossible={true} index={index} />
                     )}
                 />
             </View>
@@ -156,7 +159,7 @@ export const AddPokemonScreen = ({ navigation, route }: Props) => {
                 showsVerticalScrollIndicator={false}
                 numColumns={2}
                 renderItem={({ item }) => (
-                    <PokemonCard pokemon={item} addPossible editPossible={false}/>
+                    <PokemonCard pokemon={item} addPossible editPossible={false} />
                 )}
             />
         </View>
