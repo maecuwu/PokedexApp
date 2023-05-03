@@ -4,6 +4,7 @@ import { View, StyleSheet, TextInput, ViewStyle, StyleProp } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { useDebounce } from '../hooks/useDebounce';
+import { useTranslation } from 'react-i18next';
 
 
 interface Props {
@@ -13,6 +14,8 @@ interface Props {
 
 
 export const SearchInput = ({ style, onDebounce }: Props) => {
+
+    const { t } = useTranslation("translation");
 
     const [textValue, setTextValue] = useState('');
     const { debounceValue } = useDebounce(textValue);
@@ -28,7 +31,7 @@ export const SearchInput = ({ style, onDebounce }: Props) => {
             <View style={styles.textBackground}>
 
                 <TextInput
-                    placeholder='Buscar pokemon'
+                    placeholder={t('searchPlaceholder').toString()}
                     style={styles.textInput}
                     autoCapitalize='none'
                     autoCorrect={false}

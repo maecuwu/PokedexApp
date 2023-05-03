@@ -3,6 +3,7 @@ import { Button, Modal, Text, View, Dimensions, TouchableOpacity, StyleSheet, Sc
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import Clipboard from '@react-native-clipboard/clipboard';
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -19,6 +20,8 @@ interface Props {
 
 export const ExportModal = ({ bodyText, title, visibleLoad, onRedraw }: Props) => {
 
+    const { t } = useTranslation("translation", { keyPrefix: "exportModal" });
+
     const [visible, setVisible] = useState(visibleLoad);
     const [copied, setCopied] = useState(false);
 
@@ -28,13 +31,13 @@ export const ExportModal = ({ bodyText, title, visibleLoad, onRedraw }: Props) =
 
 
     useEffect(() => {
-        if (copied == true){
+        if (copied == true) {
             setTimeout(() => {
                 setCopied(false);
             }, 1500);
         }
     }, [copied])
-    
+
     const copyClipboard = () => {
 
         setCopied(true);
@@ -72,7 +75,7 @@ export const ExportModal = ({ bodyText, title, visibleLoad, onRedraw }: Props) =
                     paddingHorizontal: 20
                 }}>
 
-                    <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
+                    <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
                         <Text style={{ fontSize: 20, color: 'black', textAlign: 'center' }}>
                             {title}
                         </Text>
@@ -87,8 +90,8 @@ export const ExportModal = ({ bodyText, title, visibleLoad, onRedraw }: Props) =
                         onPress={() => setVisible(!visible)}
                         style={styles.closeBtn}
                     >
-                        <Text style={{fontSize: 18, color: 'black'}}>
-                            Cerrar
+                        <Text style={{ fontSize: 18, color: 'black' }}>
+                            {t('close')}
                         </Text>
                     </TouchableOpacity>
 
@@ -97,7 +100,7 @@ export const ExportModal = ({ bodyText, title, visibleLoad, onRedraw }: Props) =
                             ? (
                                 <TouchableOpacity
                                     activeOpacity={0.8}
-                                    style={styles.copyBtn}                                    
+                                    style={styles.copyBtn}
                                 >
                                     <Icon name='checkmark-circle-outline' color='green' size={30} />
                                 </TouchableOpacity>

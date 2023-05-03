@@ -2,6 +2,7 @@ import { Text, View, StyleSheet, ScrollView } from 'react-native';
 
 import { FullPokemon } from '../interfaces/pokemonInterfaces';
 import { FadeInImage } from './FadeInImage';
+import { useTranslation } from 'react-i18next';
 
 
 interface Props {
@@ -11,23 +12,32 @@ interface Props {
 
 
 export const PokemonDetails = ({ pokemon, color }: Props) => {
+
+    const { t } = useTranslation("translation", { keyPrefix: "PokemonDetails" });
+
     return (
         <ScrollView style={{ ...StyleSheet.absoluteFillObject }} showsVerticalScrollIndicator={false}>
 
             {/* TIPOS Y PESO */}
             <View style={{ ...styles.container, marginTop: 370 }}>
 
-                <Text style={styles.title}>TIPOS</Text>
+                <Text style={styles.title}>
+                    {t('types')}
+                </Text>
                 <View style={{ flexDirection: 'row' }}>
                     {
                         pokemon.types.map(({ type }) => (
                             <Text key={type.name}
-                                style={{ ...styles.regularText, marginRight: 10 }}> {type.name} </Text>
+                                style={{ ...styles.regularText, marginRight: 10 }}> 
+                                {type.name} 
+                            </Text>
                         ))
                     }
                 </View>
 
-                <Text style={styles.title}>Peso</Text>
+                <Text style={styles.title}>
+                    {t('weight')}
+                </Text>
                 <Text style={{ ...styles.regularText, marginRight: 10 }}> {pokemon.weight}lb</Text>
             </View>
 
@@ -57,7 +67,9 @@ export const PokemonDetails = ({ pokemon, color }: Props) => {
 
             {/* HABILIDADES */}
             <View style={styles.container}>
-                <Text style={styles.title}>HABILIDADES</Text>
+                <Text style={styles.title}>
+                    {t('habilities')}
+                </Text>
                 <View style={{ flexDirection: 'row' }}>
                     {
                         pokemon.abilities.map(({ ability }) => (
@@ -70,12 +82,17 @@ export const PokemonDetails = ({ pokemon, color }: Props) => {
 
             {/* MOVIMIENTOS */}
             <View style={styles.container}>
-                <Text style={styles.title}>MOVIMIENTOS</Text>
+                <Text style={styles.title}>
+                    {t('moves')}
+                </Text>
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
                     {
                         pokemon.moves.map(({ move }) => (
-                            <Text key={move.name}
-                                style={{ ...styles.regularText, marginRight: 10 }}> {move.name} </Text>
+                            <Text
+                                key={move.name}
+                                style={{ ...styles.regularText, marginRight: 10 }}>
+                                {move.name}
+                            </Text>
                         ))
                     }
                 </View>
@@ -83,14 +100,20 @@ export const PokemonDetails = ({ pokemon, color }: Props) => {
 
             {/* ESTADISTICAS */}
             <View style={styles.container}>
-                <Text style={styles.title}>ESTADÍSTICAS</Text>
+                <Text style={styles.title}>
+                    {t('stats')}
+                </Text>
                 <View>
                     {
                         pokemon.stats.map((stat) => (
                             <View style={{ flexDirection: 'row' }} key={stat.stat.name}>
-                                <Text style={{ ...styles.regularText, marginRight: 10 }}> {stat.stat.name} </Text>
-                                <View style={{ ...styles.statBar, width: stat.base_stat, backgroundColor: color }}></View>
-                                <Text style={{ ...styles.regularText, fontWeight: 'bold' }}> {stat.base_stat} </Text>
+                                <Text style={{ ...styles.regularText, marginRight: 10 }}>
+                                    {stat.stat.name}
+                                </Text>
+                                <View style={{ ...styles.statBar, width: stat.base_stat, backgroundColor: color }} />
+                                <Text style={{ ...styles.regularText, fontWeight: 'bold', marginLeft: 5 }}>
+                                    {stat.base_stat}
+                                </Text>
                             </View>
                         ))
                     }

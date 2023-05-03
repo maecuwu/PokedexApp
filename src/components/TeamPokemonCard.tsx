@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { SimplePokemon } from '../interfaces/pokemonInterfaces';
 import { TeamsRootStackParams } from '../navigator/TeamsStackNavigator';
 import { PokemonCard } from './PokemonCard';
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -18,6 +19,8 @@ interface Props {
 type ScreenNavigationProp = StackNavigationProp<TeamsRootStackParams, 'AddPokemonScreen'>;
 
 export const TeamPokemonCard = ({ pokemon, index }: Props) => {
+
+    const { t } = useTranslation("translation", { keyPrefix: "TeamPokemonCard" })
 
     const navigation = useNavigation<ScreenNavigationProp>();
 
@@ -34,7 +37,9 @@ export const TeamPokemonCard = ({ pokemon, index }: Props) => {
                     </TouchableOpacity>
                 </View>
 
-                <Text style={styles.title}> Sin pokemon </Text>
+                <Text style={styles.title}> 
+                    {t('noPokemon')}
+                </Text>
             </View>
         )
     }

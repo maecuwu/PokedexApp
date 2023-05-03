@@ -1,16 +1,14 @@
 import { useEffect, useState, useContext } from 'react';
-import { Button, Modal, Text, View, Dimensions, TouchableOpacity, StyleSheet, ScrollView, TextInput } from 'react-native';
+import { Modal, Text, View, Dimensions, TouchableOpacity, StyleSheet, ScrollView, TextInput } from 'react-native';
 
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Koffing } from 'koffing';
 
-import { TeamsRootStackParams } from '../navigator/TeamsStackNavigator';
 import { pokemonApi } from '../api/pokemonApi';
 import { SimplePokemon } from '../interfaces/pokemonInterfaces';
 import { PokemonTeamContext } from '../context/PokemonTeamContext';
 import { useForm } from '../hooks/useForm';
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -24,18 +22,17 @@ interface Props {
     onRedraw: any;
 }
 
-type ScreenNavigationProp = StackNavigationProp<TeamsRootStackParams, 'TeamScreen'>;
 
 export const ImportModal = ({ title, visibleLoad, onRedraw }: Props) => {
 
-    const [visible, setVisible] = useState(visibleLoad);
+    const { t } = useTranslation("translation", { keyPrefix: "importModal" })
 
+    const [visible, setVisible] = useState(visibleLoad);
     const { importString, onChange } = useForm({
         importString: ''
     });
-    const navigation = useNavigation<ScreenNavigationProp>();
 
-    const { saveTeam, changeTeamName, changeTeamPokemons, PokemonTeam } = useContext(PokemonTeamContext);
+    const { changeTeamName, changeTeamPokemons } = useContext(PokemonTeamContext);
 
 
     useEffect(() => {
@@ -43,10 +40,10 @@ export const ImportModal = ({ title, visibleLoad, onRedraw }: Props) => {
     }, [onRedraw])
 
 
-    const getPokemonInfoByName = async(name: string): Promise<SimplePokemon> => {
+    const getPokemonInfoByName = async (name: string): Promise<SimplePokemon> => {
 
         const pokemon = pokemonApi.get(`https://pokeapi.co/api/v2/pokemon/${name.toLocaleLowerCase()}`)
-            .then( ({data}) => {
+            .then(({ data }) => {
                 const pokemonAux: SimplePokemon = {
                     id: data.id,
                     name: data.name,
@@ -54,12 +51,12 @@ export const ImportModal = ({ title, visibleLoad, onRedraw }: Props) => {
                 }
                 return pokemonAux;
             });
-        
+
         return pokemon.then();
     }
 
 
-    const onImport = async() => {
+    const onImport = async () => {
         setVisible(!visible);
 
         const parsedTeam = JSON.parse(Koffing.parse(importString).toJson());
@@ -69,7 +66,7 @@ export const ImportModal = ({ title, visibleLoad, onRedraw }: Props) => {
 
         const pokemonsInTeam: SimplePokemon[] = [];
         const pokemons = parsedTeam.teams[0].pokemon;
-        
+
         for (const pokemonAux of pokemons) {
             const pokemon = await getPokemonInfoByName(pokemonAux.name);
             pokemonsInTeam.push(pokemon);
@@ -131,8 +128,8 @@ export const ImportModal = ({ title, visibleLoad, onRedraw }: Props) => {
                         onPress={() => onImport}
                         style={styles.importBtn}
                     >
-                        <Text style={{fontSize: 18, color: 'black'}}>
-                            Importar
+                        <Text style={{ fontSize: 18, color: 'black' }}>
+                            {t('import')}
                         </Text>
                     </TouchableOpacity>
 

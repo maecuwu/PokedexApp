@@ -4,6 +4,7 @@ import { Text, View, StyleSheet, TouchableOpacity, ActivityIndicator, Alert, Dim
 import { StackScreenProps } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTranslation } from 'react-i18next';
 
 import { PokemonRootStackParams } from '../navigator/PokemonStackNavigator';
 import { FadeInImage } from '../components/FadeInImage';
@@ -22,7 +23,10 @@ interface Props extends StackScreenProps<PokemonRootStackParams, 'PokemonScreen'
 export const PokemonScreen = ({ navigation, route }: Props) => {
 
     const { bgColor, pokemon, fontColor, addPossible, editPossible, editIndex } = route.params;
+    
     const { top } = useSafeAreaInsets();
+
+    const { t } = useTranslation("translation", { keyPrefix: "AddPokemonScreen" })
 
     const { isLoading, pokemon: pokemonInfo } = usePokemon(pokemon.id);
     const { addPokemon, editPokemon } = useContext(PokemonTeamContext);
@@ -31,15 +35,15 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
 
         if (addPokemon(pokemon)) {
             Alert.alert(
-                'Pokemon añadido',
-                `${pokemon.name} añadido a tu equipo`,
+                t('addedPokemonTitle'),
+                `${pokemon.name} ${t('addedPokemon')}`,
                 [
                     { text: 'OK' },
                 ]);
         } else {
             Alert.alert(
-                'Pokemon no añadido',
-                'No se ha podido añadir el pokemon a tu equipo',
+                t('notAddedPokemonTitle'),
+                `${t('notAddedPokemon')}`,
                 [
                     { text: 'OK' },
                 ]);
@@ -51,8 +55,8 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
         editPokemon(editIndex!, pokemon);
 
         Alert.alert(
-            'Pokemon añadido',
-            `${pokemon.name} añadido a tu equipo y el anterior ha sido eliminado`,
+            t('addedPokemonTitle'),
+            `${pokemon.name} ${t('pokemonReplaced')}`,
             [
                 { text: 'OK' },
             ]);

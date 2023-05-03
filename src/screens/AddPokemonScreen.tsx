@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { Text, View, FlatList, Dimensions, TouchableOpacity, StyleSheet } from 'react-native';
 
 import { StackScreenProps } from '@react-navigation/stack';
@@ -12,7 +12,6 @@ import { PokemonCard } from '../components/PokemonCard';
 import { LoadingComponent } from '../components/LoadingComponent';
 import { SimplePokemon } from '../interfaces/pokemonInterfaces';
 import { TeamsRootStackParams } from '../navigator/TeamsStackNavigator';
-import { PokemonTeamContext } from '../context/PokemonTeamContext';
 
 
 const { width: screenWidth } = Dimensions.get('window');
@@ -24,8 +23,6 @@ export const AddPokemonScreen = ({ navigation, route }: Props) => {
 
     const editMode = route.params.editMode;
     const index = route.params.index;
-
-    const { PokemonTeam } = useContext(PokemonTeamContext);
 
     const { top } = useSafeAreaInsets();
 

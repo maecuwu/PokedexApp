@@ -4,6 +4,7 @@ import { Text, TouchableOpacity, View, StyleSheet, Dimensions, TextInput, Scroll
 import { StackScreenProps } from '@react-navigation/stack';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useTranslation } from 'react-i18next';
 
 import { TeamsRootStackParams } from '../navigator/TeamsStackNavigator';
 import { globalStyles } from '../theme/appTheme';
@@ -12,7 +13,6 @@ import { PokemonTeamContext } from '../context/PokemonTeamContext';
 import { Spacer } from '../components/Spacer';
 import { ExportModal } from '../components/ExportModal';
 import { ImportModal } from '../components/ImportModal';
-import { useIsFocused } from '@react-navigation/native';
 
 
 
@@ -30,11 +30,13 @@ export const TeamScreen = ({ navigation, route }: Props) => {
 
     const { top } = useSafeAreaInsets();
 
+    const { t } = useTranslation("translation", { keyPrefix: "TeamScreen" });
+
     const [nameChanged, setNameChanged] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
     const [exportString, setExportString] = useState('');
 
-    const { saveTeam, changeTeamName, getTeam, changeTeamPokemons, deleteTeam, editPokemon } = useContext(PokemonTeamContext);
+    const { saveTeam, changeTeamName, getTeam, changeTeamPokemons, deleteTeam } = useContext(PokemonTeamContext);
     let { PokemonTeam: { name, pokemons } } = useContext(PokemonTeamContext);
 
 
@@ -48,7 +50,7 @@ export const TeamScreen = ({ navigation, route }: Props) => {
             })
         }
 
-        changeTeamName('Equipo sin nombre');
+        changeTeamName(t('defaultTeamName'));
         changeTeamPokemons([]);
 
     }, [])
@@ -120,7 +122,7 @@ export const TeamScreen = ({ navigation, route }: Props) => {
             <View style={{ alignItems: 'center', ...globalStyles.globalMargin }}>
                 <View style={{ ...styles.textBackground, width: screenWidth - 40 }}>
                     <TextInput
-                        placeholder='Nombre del equipo'
+                        placeholder={t('placeholderTeamInput').toString()}
                         style={styles.textInput}
                         autoCapitalize='none'
                         autoCorrect={false}
@@ -139,13 +141,13 @@ export const TeamScreen = ({ navigation, route }: Props) => {
                                     onPress={() => setModalVisible(!modalVisible)}
                                 >
                                     <Text style={{ ...globalStyles.title, color: 'black', fontSize: 20 }}>
-                                        Exportar
+                                        {t('export')}
                                     </Text>
                                 </TouchableOpacity>
 
                                 <ExportModal
                                     bodyText={exportString}
-                                    title='Exportar equipo a Pokemon Showdown'
+                                    title={t('exportModal')}
                                     visibleLoad={modalVisible}
                                     onRedraw={modalVisible}
                                 />
@@ -159,12 +161,12 @@ export const TeamScreen = ({ navigation, route }: Props) => {
                                     onPress={() => setModalVisible(!modalVisible)}
                                 >
                                     <Text style={{ ...globalStyles.title, color: 'black', fontSize: 20 }}>
-                                        Importar
+                                        {t('import')}
                                     </Text>
                                 </TouchableOpacity>
 
                                 <ImportModal
-                                    title='Importar equipo desde Pokemon Showdown'
+                                    title={t('importModal')}
                                     visibleLoad={modalVisible}
                                     onRedraw={modalVisible}
                                 />
@@ -188,7 +190,7 @@ export const TeamScreen = ({ navigation, route }: Props) => {
                     onPress={onSaveTeam}
                 >
                     <Text style={{ ...globalStyles.title, color: 'black', fontSize: 20 }}>
-                        Guardar
+                        {t('saveBtn')}
                     </Text>
                 </TouchableOpacity>
 

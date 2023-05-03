@@ -1,0 +1,47 @@
+{
+    "translation": {
+        "AddPokemonScreen": {
+            "addedPokemonTitle": "Pokemon añadido",
+            "addedPokemon": "añadido a tu equipo correctamente",
+            "notAddedPokemonTitle": "Pokemon no añadido",
+            "notAddedPokemon": "No se ha podido añadir el pokemon a tu equipo",
+            "pokemonReplaced": "añadido a tu equipo y el anterior ha sido eliminado"
+        },
+        "TeamScreen": {
+            "defaultTeamName": "Equipo sin nombre",
+            "placeholderTeamInput": "Nombre del equipo",
+            "export": "Exportar",
+            "exportModal": "Exportar equipo a Pokemon Showdown",
+            "import": "Importar",
+            "importModal": "Importar equipo desde Pokemon Showdown",
+            "saveBtn": "Guardar"
+        },
+        "TeamsScreen": {
+            "title": "Tus equipos",
+            "createTeam": "Crear equipo",
+            "noTeams": "No hay equipos creados"
+        },
+        "PokemonDetails": {
+            "types": "TIPOS",
+            "weight": "PESO",
+            "habilities": "HABILIDADES",
+            "moves": "MOVIMIENTOS",
+            "stats": "ESTADÍSTICAS"
+        },
+        "TeamPokemonCard": {
+            "noPokemon": "Sin pokemon"
+        },
+        "ExportModal": {
+            "close": "Cerrar"
+        },
+        "ImportModal": {
+            "import": "Importar"
+        },
+        "loading": "Cargando...",
+        "searchPlaceholder": "Buscar pokemon",
+        "tabs": {
+            "searchTab": "Buscar",
+            "teamsTab": "Equipos"
+        }
+    }
+}

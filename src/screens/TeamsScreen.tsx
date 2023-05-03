@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useTranslation } from 'react-i18next';
 
 import { globalStyles } from '../theme/appTheme';
 import { TeamsRootStackParams } from '../navigator/TeamsStackNavigator';
@@ -21,7 +22,10 @@ type ScreenNavigationProp = StackNavigationProp<TeamsRootStackParams, 'TeamsScre
 export const TeamsScreen = () => {
 
     const { top } = useSafeAreaInsets();
+
     const navigator = useNavigation<ScreenNavigationProp>();
+
+    const { t } = useTranslation("translation", { keyPrefix: "TeamsScreen" });
 
     const { getAllTeams, deleteTeam } = useContext(PokemonTeamContext);
 
@@ -82,7 +86,7 @@ export const TeamsScreen = () => {
                     marginBottom: 20,
                     paddingBottom: 10
                 }}>
-                    Tus equipos
+                    {t('title')}
                 </Text>
 
                 <TouchableOpacity
@@ -91,7 +95,7 @@ export const TeamsScreen = () => {
                 >
                     <View style={styles.newTeamContainer}>
                         <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'black' }}>
-                            Crear equipo
+                            {t('createTeam')}
                         </Text>
                     </View>
                 </TouchableOpacity>
@@ -114,7 +118,7 @@ export const TeamsScreen = () => {
                                         <View style={styles.deleteBtn}>
                                             <TouchableOpacity
                                                 activeOpacity={0.8}
-                                                onPress={()  => onDelete(equipo)}
+                                                onPress={() => onDelete(equipo)}
                                             >
                                                 <Icon name='close-outline' color='black' size={20} />
                                             </TouchableOpacity>
@@ -131,7 +135,7 @@ export const TeamsScreen = () => {
                         )
                         : (
                             <Text style={{ fontSize: 30, marginTop: 100 }}>
-                                No hay equipos creados
+                                {t('noTeams')}
                             </Text>
                         )
                 }
