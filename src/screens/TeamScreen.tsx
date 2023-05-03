@@ -205,7 +205,7 @@ export const TeamScreen = ({ navigation, route }: Props) => {
 
 
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     headerContainer: {
         height: 10,
         zIndex: 999,

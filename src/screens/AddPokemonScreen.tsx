@@ -168,7 +168,7 @@ export const AddPokemonScreen = ({ navigation, route }: Props) => {
 
 
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     backButton: {
         position: 'absolute',
         zIndex: 999

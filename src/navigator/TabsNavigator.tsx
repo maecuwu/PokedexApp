@@ -8,6 +8,7 @@ import { PokemonStackNavigator } from './PokemonStackNavigator';
 import { SearchScreen } from '../screens/SearchScreen';
 import { TeamsStackNavigator } from './TeamsStackNavigator';
 import { ThemeContext } from '../context/ThemeContext';
+import { SettingsScreen } from '../screens/SettingsScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -63,6 +64,16 @@ export const TabsNavigator = () => {
                     tabBarLabel: t('teamsTab').toString(),
                     tabBarIcon: (({ color }) => (
                         <Icon color={color} size={25} name='layers-outline' />
+                    ))
+                }}
+            />
+            <Tab.Screen
+                name="Settings"
+                component={SettingsScreen}
+                options={{
+                    tabBarLabel: t('settingsTab').toString(),
+                    tabBarIcon: (({ color }) => (
+                        <Icon color={color} size={25} name='settings-outline' />
                     ))
                 }}
             />

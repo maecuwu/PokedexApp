@@ -28,6 +28,15 @@
             "moves": "MOVES",
             "stats": "STATS"
         },
+        "SettingsScreen": {
+            "title": "User preferences",
+            "languageTitle": "Language",
+            "english": "English",
+            "spanish": "Spanish",
+            "themeTitle": "Theme",
+            "light": "Light",
+            "dark": "Dark"
+        },
         "TeamPokemonCard": {
             "noPokemon": "No Pokemon"
         },
@@ -40,8 +49,9 @@
         "loading": "Loading...",
         "searchPlaceholder": "Search pokemon",
         "tabs": {
-            "searchTab": "Buscar",
-            "teamsTab": "Equipos"
+            "searchTab": "Search",
+            "teamsTab": "Teams",
+            "settingsTab": "Settings"
         }
     }
 }
