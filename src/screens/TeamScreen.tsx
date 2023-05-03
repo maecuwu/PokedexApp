@@ -13,6 +13,7 @@ import { PokemonTeamContext } from '../context/PokemonTeamContext';
 import { Spacer } from '../components/Spacer';
 import { ExportModal } from '../components/ExportModal';
 import { ImportModal } from '../components/ImportModal';
+import { ThemeContext } from '../context/ThemeContext';
 
 
 
@@ -29,6 +30,8 @@ export const TeamScreen = ({ navigation, route }: Props) => {
     const editMode = route.params.editMode;
 
     const { top } = useSafeAreaInsets();
+
+    const { theme: { colors } } = useContext(ThemeContext);
 
     const { t } = useTranslation("translation", { keyPrefix: "TeamScreen" });
 
@@ -114,7 +117,7 @@ export const TeamScreen = ({ navigation, route }: Props) => {
                     onPress={() => navigation.goBack()}
                 >
 
-                    <Icon name='arrow-back-outline' color='black' size={35} />
+                    <Icon name='arrow-back-outline' color={colors.text} size={35} />
 
                 </TouchableOpacity>
             </View>

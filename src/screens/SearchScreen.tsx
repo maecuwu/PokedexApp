@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Text, View, FlatList, Dimensions } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -9,6 +9,7 @@ import { usePokemonSearch } from '../hooks/usePokemonSearch';
 import { PokemonCard } from '../components/PokemonCard';
 import { LoadingComponent } from '../components/LoadingComponent';
 import { SimplePokemon } from '../interfaces/pokemonInterfaces';
+import { ThemeContext } from '../context/ThemeContext';
 
 
 const { width: screenWidth } = Dimensions.get('window');
@@ -17,6 +18,8 @@ const { width: screenWidth } = Dimensions.get('window');
 export const SearchScreen = () => {
 
     const { top } = useSafeAreaInsets();
+
+    const { theme: { colors } } = useContext(ThemeContext);
 
     const { isFetching, simplePokemonList } = usePokemonSearch();
     const [searchString, setSearchString] = useState('');
@@ -73,7 +76,7 @@ export const SearchScreen = () => {
                         ...globalStyles.title,
                         ...globalStyles.globalMargin,
                         top: top + 20,
-                        color: 'black',
+                        color: colors.text,
                         marginBottom: 20,
                         paddingBottom: 10,
                         marginTop: top + 60

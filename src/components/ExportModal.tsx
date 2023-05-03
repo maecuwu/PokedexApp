@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
-import { Button, Modal, Text, View, Dimensions, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { useContext, useEffect, useState } from 'react';
+import { Modal, Text, View, Dimensions, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import Clipboard from '@react-native-clipboard/clipboard';
 import { useTranslation } from 'react-i18next';
 
-
+import { ThemeContext } from '../context/ThemeContext';
 
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
@@ -20,7 +20,9 @@ interface Props {
 
 export const ExportModal = ({ bodyText, title, visibleLoad, onRedraw }: Props) => {
 
-    const { t } = useTranslation("translation", { keyPrefix: "exportModal" });
+    const { t } = useTranslation("translation", { keyPrefix: "ExportModal" });
+
+    const { theme: { colors } } = useContext(ThemeContext);
 
     const [visible, setVisible] = useState(visibleLoad);
     const [copied, setCopied] = useState(false);
@@ -58,7 +60,7 @@ export const ExportModal = ({ bodyText, title, visibleLoad, onRedraw }: Props) =
                 alignItems: 'center'
             }}>
                 <View style={{
-                    backgroundColor: 'white',
+                    backgroundColor: colors.background,
                     width: screenWidth * 0.9,
                     height: screenHeight * 0.9,
                     justifyContent: 'center',
@@ -70,17 +72,17 @@ export const ExportModal = ({ bodyText, title, visibleLoad, onRedraw }: Props) =
                     shadowOpacity: 0.25,
                     elevation: 12,
                     borderRadius: 15,
-                    borderColor: 'black',
+                    borderColor: colors.border,
                     borderWidth: 1,
                     paddingHorizontal: 20
                 }}>
 
                     <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
-                        <Text style={{ fontSize: 20, color: 'black', textAlign: 'center' }}>
+                        <Text style={{ fontSize: 20, color: colors.text, textAlign: 'center' }}>
                             {title}
                         </Text>
 
-                        <Text style={{ fontSize: 16, marginBottom: 20, marginTop: 10, color: 'black' }}>
+                        <Text style={{ fontSize: 16, marginBottom: 20, marginTop: 10, color: colors.text }}>
                             {bodyText}
                         </Text>
                     </View>
@@ -111,7 +113,7 @@ export const ExportModal = ({ bodyText, title, visibleLoad, onRedraw }: Props) =
                                     style={styles.copyBtn}
                                     onPress={copyClipboard}
                                 >
-                                    <Icon name='copy-outline' color='black' size={30} />
+                                    <Icon name='copy-outline' color={colors.text} size={30} />
                                 </TouchableOpacity>
                             )
                     }

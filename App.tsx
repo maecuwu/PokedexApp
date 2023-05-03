@@ -1,15 +1,18 @@
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
+
 import { TabsNavigator } from './src/navigator/TabsNavigator';
 import { PokemonTeamProvider } from './src/context/PokemonTeamContext';
-
+import { ThemeProvider } from './src/context/ThemeContext';
 
 
 const AppState = ({ children }: any) => {
     return (
-        <PokemonTeamProvider>
-            {children}
-        </PokemonTeamProvider>
+        <ThemeProvider>
+            <PokemonTeamProvider>
+                {children}
+            </PokemonTeamProvider>
+        </ThemeProvider>
     )
 }
 

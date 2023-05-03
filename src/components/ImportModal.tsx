@@ -3,12 +3,13 @@ import { Modal, Text, View, Dimensions, TouchableOpacity, StyleSheet, ScrollView
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Koffing } from 'koffing';
+import { useTranslation } from 'react-i18next';
 
 import { pokemonApi } from '../api/pokemonApi';
 import { SimplePokemon } from '../interfaces/pokemonInterfaces';
 import { PokemonTeamContext } from '../context/PokemonTeamContext';
 import { useForm } from '../hooks/useForm';
-import { useTranslation } from 'react-i18next';
+import { ThemeContext } from '../context/ThemeContext';
 
 
 
@@ -25,7 +26,9 @@ interface Props {
 
 export const ImportModal = ({ title, visibleLoad, onRedraw }: Props) => {
 
-    const { t } = useTranslation("translation", { keyPrefix: "importModal" })
+    const { t } = useTranslation("translation", { keyPrefix: "ImportModal" });
+
+    const { theme: { colors } } = useContext(ThemeContext);
 
     const [visible, setVisible] = useState(visibleLoad);
     const { importString, onChange } = useForm({
@@ -90,7 +93,7 @@ export const ImportModal = ({ title, visibleLoad, onRedraw }: Props) => {
                 alignItems: 'center'
             }}>
                 <View style={{
-                    backgroundColor: 'white',
+                    backgroundColor: colors.background,
                     width: screenWidth * 0.9,
                     height: screenHeight * 0.5,
                     justifyContent: 'center',
@@ -102,10 +105,10 @@ export const ImportModal = ({ title, visibleLoad, onRedraw }: Props) => {
                     shadowOpacity: 0.25,
                     elevation: 12,
                     borderRadius: 15,
-                    borderColor: 'black',
+                    borderColor: colors.border,
                     paddingHorizontal: 20
                 }}>
-                    <Text style={{ fontSize: 20, color: 'black', textAlign: 'center' }}>
+                    <Text style={{ fontSize: 20, color: colors.text, textAlign: 'center' }}>
                         {title}
                     </Text>
 

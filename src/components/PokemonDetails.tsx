@@ -1,8 +1,11 @@
+import { useContext } from 'react';
 import { Text, View, StyleSheet, ScrollView } from 'react-native';
+
+import { useTranslation } from 'react-i18next';
 
 import { FullPokemon } from '../interfaces/pokemonInterfaces';
 import { FadeInImage } from './FadeInImage';
-import { useTranslation } from 'react-i18next';
+import { ThemeContext } from '../context/ThemeContext';
 
 
 interface Props {
@@ -15,35 +18,39 @@ export const PokemonDetails = ({ pokemon, color }: Props) => {
 
     const { t } = useTranslation("translation", { keyPrefix: "PokemonDetails" });
 
+    const { theme: { colors } } = useContext(ThemeContext);
+
     return (
         <ScrollView style={{ ...StyleSheet.absoluteFillObject }} showsVerticalScrollIndicator={false}>
 
             {/* TIPOS Y PESO */}
             <View style={{ ...styles.container, marginTop: 370 }}>
 
-                <Text style={styles.title}>
+                <Text style={{ ...styles.title, color: colors.text }}>
                     {t('types')}
                 </Text>
                 <View style={{ flexDirection: 'row' }}>
                     {
                         pokemon.types.map(({ type }) => (
                             <Text key={type.name}
-                                style={{ ...styles.regularText, marginRight: 10 }}> 
-                                {type.name} 
+                                style={{ ...styles.regularText, marginRight: 10, color: colors.text }}>
+                                {type.name}
                             </Text>
                         ))
                     }
                 </View>
 
-                <Text style={styles.title}>
+                <Text style={{ ...styles.title, color: colors.text }}>
                     {t('weight')}
                 </Text>
-                <Text style={{ ...styles.regularText, marginRight: 10 }}> {pokemon.weight}lb</Text>
+                <Text style={{ ...styles.regularText, marginRight: 10, color: colors.text }}>
+                    {pokemon.weight}lb
+                </Text>
             </View>
 
             {/* SPRITES */}
             <View style={styles.container}>
-                <Text style={styles.title}>SPRITES</Text>
+                <Text style={{ ...styles.title, color: colors.text }}>SPRITES</Text>
             </View>
 
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -67,14 +74,18 @@ export const PokemonDetails = ({ pokemon, color }: Props) => {
 
             {/* HABILIDADES */}
             <View style={styles.container}>
-                <Text style={styles.title}>
+                <Text style={{ ...styles.title, color: colors.text }}>
                     {t('habilities')}
                 </Text>
                 <View style={{ flexDirection: 'row' }}>
                     {
                         pokemon.abilities.map(({ ability }) => (
-                            <Text key={ability.name}
-                                style={{ ...styles.regularText, marginRight: 10 }}> {ability.name} </Text>
+                            <Text
+                                key={ability.name}
+                                style={{ ...styles.regularText, marginRight: 10, color: colors.text }}
+                            >
+                                {ability.name}
+                            </Text>
                         ))
                     }
                 </View>
@@ -82,7 +93,7 @@ export const PokemonDetails = ({ pokemon, color }: Props) => {
 
             {/* MOVIMIENTOS */}
             <View style={styles.container}>
-                <Text style={styles.title}>
+                <Text style={{ ...styles.title, color: colors.text }}>
                     {t('moves')}
                 </Text>
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
@@ -90,7 +101,8 @@ export const PokemonDetails = ({ pokemon, color }: Props) => {
                         pokemon.moves.map(({ move }) => (
                             <Text
                                 key={move.name}
-                                style={{ ...styles.regularText, marginRight: 10 }}>
+                                style={{ ...styles.regularText, marginRight: 10, color: colors.text }}
+                            >
                                 {move.name}
                             </Text>
                         ))
@@ -100,18 +112,18 @@ export const PokemonDetails = ({ pokemon, color }: Props) => {
 
             {/* ESTADISTICAS */}
             <View style={styles.container}>
-                <Text style={styles.title}>
+                <Text style={{ ...styles.title, color: colors.text }}>
                     {t('stats')}
                 </Text>
                 <View>
                     {
                         pokemon.stats.map((stat) => (
                             <View style={{ flexDirection: 'row' }} key={stat.stat.name}>
-                                <Text style={{ ...styles.regularText, marginRight: 10 }}>
+                                <Text style={{ ...styles.regularText, marginRight: 10, color: colors.text }}>
                                     {stat.stat.name}
                                 </Text>
                                 <View style={{ ...styles.statBar, width: stat.base_stat, backgroundColor: color }} />
-                                <Text style={{ ...styles.regularText, fontWeight: 'bold', marginLeft: 5 }}>
+                                <Text style={{ ...styles.regularText, fontWeight: 'bold', marginLeft: 5, color: colors.text }}>
                                     {stat.base_stat}
                                 </Text>
                             </View>
@@ -136,11 +148,11 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 22,
         fontWeight: 'bold',
-        color: 'black',
         marginTop: 20
     },
     regularText: {
-        fontSize: 19
+        fontSize: 19,
+        opacity: 0.6
     },
     basicSprite: {
         width: 100,

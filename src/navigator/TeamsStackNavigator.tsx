@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { TeamScreen } from '../screens/TeamScreen';
@@ -5,6 +7,7 @@ import { TeamsScreen } from '../screens/TeamsScreen';
 import { AddPokemonScreen } from '../screens/AddPokemonScreen';
 import { PokemonScreen } from '../screens/PokemonScreen';
 import { SimplePokemon } from '../interfaces/pokemonInterfaces';
+import { ThemeContext } from '../context/ThemeContext';
 
 
 export type TeamsRootStackParams = {
@@ -18,12 +21,15 @@ export type TeamsRootStackParams = {
 const Stack = createStackNavigator<TeamsRootStackParams>();
 
 export const TeamsStackNavigator = () => {
+
+    const { theme: { colors } } = useContext(ThemeContext);
+
     return (
         <Stack.Navigator
             screenOptions={{
                 headerShown: false,
                 cardStyle: {
-                    backgroundColor: 'white'
+                    backgroundColor: colors.background
                 }
             }}
         >

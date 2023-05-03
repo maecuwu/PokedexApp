@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Text, View, FlatList, Dimensions, TouchableOpacity, StyleSheet } from 'react-native';
 
 import { StackScreenProps } from '@react-navigation/stack';
@@ -12,6 +12,7 @@ import { PokemonCard } from '../components/PokemonCard';
 import { LoadingComponent } from '../components/LoadingComponent';
 import { SimplePokemon } from '../interfaces/pokemonInterfaces';
 import { TeamsRootStackParams } from '../navigator/TeamsStackNavigator';
+import { ThemeContext } from '../context/ThemeContext';
 
 
 const { width: screenWidth } = Dimensions.get('window');
@@ -25,6 +26,8 @@ export const AddPokemonScreen = ({ navigation, route }: Props) => {
     const index = route.params.index;
 
     const { top } = useSafeAreaInsets();
+
+    const { theme: { colors } } = useContext(ThemeContext);
 
     const { isFetching, simplePokemonList } = usePokemonSearch();
     const [searchString, setSearchString] = useState('');
@@ -72,7 +75,7 @@ export const AddPokemonScreen = ({ navigation, route }: Props) => {
                     onPress={() => navigation.goBack()}
                 >
 
-                    <Icon name='arrow-back-outline' color='black' size={35} />
+                    <Icon name='arrow-back-outline' color={colors.text} size={35} />
 
                 </TouchableOpacity>
 
@@ -122,7 +125,7 @@ export const AddPokemonScreen = ({ navigation, route }: Props) => {
                 onPress={() => navigation.goBack()}
             >
 
-                <Icon name='arrow-back-outline' color='black' size={35} />
+                <Icon name='arrow-back-outline' color={colors.text} size={35} />
 
             </TouchableOpacity>
 

@@ -12,6 +12,7 @@ import { TeamsRootStackParams } from '../navigator/TeamsStackNavigator';
 import { PokemonTeamContext } from '../context/PokemonTeamContext';
 import { MiniPokemonImage } from '../components/MiniPokemonImage';
 import { Spacer } from '../components/Spacer';
+import { ThemeContext } from '../context/ThemeContext';
 
 
 
@@ -24,6 +25,8 @@ export const TeamsScreen = () => {
     const { top } = useSafeAreaInsets();
 
     const navigator = useNavigation<ScreenNavigationProp>();
+
+    const { theme: { colors, dark } } = useContext(ThemeContext);
 
     const { t } = useTranslation("translation", { keyPrefix: "TeamsScreen" });
 
@@ -69,10 +72,17 @@ export const TeamsScreen = () => {
             }
         >
 
-            <Image
-                source={require('../assets/pokebola.png')}
-                style={globalStyles.pokeballBackground}
-            />
+            {
+                (dark)
+                    ? <Image
+                        source={require('../assets/pokebola-blanca.png')}
+                        style={globalStyles.pokeballBackground}
+                    />
+                    : <Image
+                        source={require('../assets/pokebola.png')}
+                        style={globalStyles.pokeballBackground}
+                    />
+            }
 
             <View style={{
                 ...globalStyles.globalMargin,
@@ -81,7 +91,7 @@ export const TeamsScreen = () => {
                 <Text style={{
                     ...globalStyles.title,
                     ...globalStyles.globalMargin,
-                    color: 'black',
+                    color: colors.text,
                     top: top + 20,
                     marginBottom: 20,
                     paddingBottom: 10

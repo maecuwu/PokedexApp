@@ -1,22 +1,25 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useContext } from 'react';
 
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons'
+import { useTranslation } from 'react-i18next';
 
 import { PokemonStackNavigator } from './PokemonStackNavigator';
 import { SearchScreen } from '../screens/SearchScreen';
 import { TeamsStackNavigator } from './TeamsStackNavigator';
-import { useTranslation } from 'react-i18next';
+import { ThemeContext } from '../context/ThemeContext';
 
 const Tab = createBottomTabNavigator();
 
 export const TabsNavigator = () => {
 
+    const { theme: { colors, tabBarColor } } = useContext(ThemeContext);
     const { t } = useTranslation('translation', { keyPrefix: 'tabs' })
 
     return (
         <Tab.Navigator
             sceneContainerStyle={{
-                backgroundColor: 'white'
+                backgroundColor: colors.background
             }}
             screenOptions={{
                 headerShown: false,
@@ -29,7 +32,7 @@ export const TabsNavigator = () => {
                     borderWidth: 0,
                     elevation: 0,
                     position: 'absolute',
-                    backgroundColor: 'rgba(255, 255, 255, 0.85)',
+                    backgroundColor: tabBarColor,
                 },
             }}
         >
