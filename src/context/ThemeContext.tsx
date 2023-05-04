@@ -2,6 +2,7 @@ import { createContext, useEffect, useReducer } from 'react'
 import { Appearance, AppState } from 'react-native';
 
 import { ThemeState, darkTheme, lightTheme, themeReducer } from './themeReducer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export interface ThemeContextProps {
@@ -14,18 +15,22 @@ export const ThemeContext = createContext({} as ThemeContextProps);
 
 export const ThemeProvider = ({ children }: any) => {
 
-    const [theme, dispatch] = useReducer(themeReducer, 
+    const [theme, dispatch] = useReducer(themeReducer,
         (Appearance.getColorScheme() === 'dark') ? darkTheme : lightTheme);
-        
-    // Coger por defecto del usuario
-    //(Appearance.getColorScheme() === 'dark') ? darkTheme : lightTheme);
 
-    const setDarkTheme = () => {
+
+
+    AsyncStorage.setItem('currentTheme', theme.currentTheme);
+
+
+    const setDarkTheme = async () => {
         dispatch({ type: 'set_dark_theme' })
+        await AsyncStorage.setItem('currentTheme', theme.currentTheme);
     }
 
-    const setLightTheme = () => {
+    const setLightTheme = async () => {
         dispatch({ type: 'set_light_theme' })
+        await AsyncStorage.setItem('currentTheme', theme.currentTheme);
     }
 
 
