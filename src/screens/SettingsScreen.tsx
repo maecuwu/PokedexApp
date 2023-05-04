@@ -5,7 +5,6 @@ import { Picker } from '@react-native-picker/picker';
 import i18n from '../../i18n';
 import { ThemeContext } from '../context/ThemeContext';
 import { useTranslation } from 'react-i18next';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export const SettingsScreen = () => {
@@ -35,9 +34,7 @@ export const SettingsScreen = () => {
 
     useEffect(() => {
         setSelectedLanguage(i18n.language);
-        AsyncStorage.getItem('currentTheme').then( (value) => {
-            setSelectedTheme(value!);
-        })
+        setSelectedTheme(theme.currentTheme);
     }, [])
 
 

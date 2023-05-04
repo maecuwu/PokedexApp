@@ -19,18 +19,12 @@ export const ThemeProvider = ({ children }: any) => {
         (Appearance.getColorScheme() === 'dark') ? darkTheme : lightTheme);
 
 
-
-    AsyncStorage.setItem('currentTheme', theme.currentTheme);
-
-
     const setDarkTheme = async () => {
         dispatch({ type: 'set_dark_theme' })
-        await AsyncStorage.setItem('currentTheme', theme.currentTheme);
     }
 
     const setLightTheme = async () => {
         dispatch({ type: 'set_light_theme' })
-        await AsyncStorage.setItem('currentTheme', theme.currentTheme);
     }
 
 

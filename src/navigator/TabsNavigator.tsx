@@ -9,6 +9,7 @@ import { SearchScreen } from '../screens/SearchScreen';
 import { TeamsStackNavigator } from './TeamsStackNavigator';
 import { ThemeContext } from '../context/ThemeContext';
 import { SettingsScreen } from '../screens/SettingsScreen';
+import { TopTabs } from './TopTabsNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -58,8 +59,8 @@ export const TabsNavigator = () => {
                 }}
             />
             <Tab.Screen
-                name="Teams"
-                component={TeamsStackNavigator}
+                name="Teams top tabs"
+                component={TopTabs}
                 options={{
                     tabBarLabel: t('teamsTab').toString(),
                     tabBarIcon: (({ color }) => (

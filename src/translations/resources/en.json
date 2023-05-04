@@ -51,7 +51,9 @@
         "tabs": {
             "searchTab": "Search",
             "teamsTab": "Teams",
-            "settingsTab": "Settings"
+            "settingsTab": "Settings",
+            "competitiveTab": "Competitive",
+            "myTeamsTab": "My teams"
         }
     }
 }
