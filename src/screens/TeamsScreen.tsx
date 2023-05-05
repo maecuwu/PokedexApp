@@ -28,7 +28,6 @@ export const TeamsScreen = () => {
     const navigator = useNavigation<ScreenNavigationProp>();
 
     const { theme: { colors, dark } } = useContext(ThemeContext);
-
     const { t } = useTranslation("translation", { keyPrefix: "TeamsScreen" });
 
     const { getAllTeams, deleteTeam } = useContext(PokemonTeamContext);

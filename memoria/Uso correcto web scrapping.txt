@@ -1,0 +1,2 @@
+guardar html del web scrapping en una base de datos o un fichero que se refresque cada x tiempo en busca de cambios en la web
+y de ahi ya sacar lo que necesite 

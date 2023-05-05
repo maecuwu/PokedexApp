@@ -54,6 +54,9 @@
             "settingsTab": "Ajustes",
             "competitiveTab": "Competitivo",
             "myTeamsTab": "Mis equipos"
+        },
+        "competitivePokemon": {
+            "notLoaded": "No se ha podido cargar información de este pokemon"
         }
     }
 }

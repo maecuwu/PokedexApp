@@ -11,11 +11,15 @@ export const usePokemon = (id: string) => {
 
 
     const getPokemonInfo = async () => {
-        
+
         setIsLoading(true);
 
-        const { data } = await pokemonApi.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
-        setPokemon(data);
+        try {
+            const { data } = await pokemonApi.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+            setPokemon(data);
+        } catch (error: any) {
+            console.log(error.response);
+        }
 
         setIsLoading(false);
 

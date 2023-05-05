@@ -28,12 +28,12 @@ export const TopTabs = () => {
                     color: colors.text,
                     fontSize: 15
                 },
-                tabBarActiveTintColor: '#5856D6'
+                tabBarActiveTintColor: '#5856D6',                
             }}
         >
             <Tab.Screen name="Teams" component={TeamsStackNavigator} 
                 options={{
-                    tabBarLabel: t('myTeamsTab').toString()
+                    tabBarLabel: t('myTeamsTab').toString(),
                 }}
             />
             <Tab.Screen name="CompetitiveScreen" component={CompetitiveScreen} 
