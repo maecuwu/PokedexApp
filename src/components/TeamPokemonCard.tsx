@@ -3,11 +3,11 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useTranslation } from 'react-i18next';
 
 import { SimplePokemon } from '../interfaces/pokemonInterfaces';
 import { TeamsRootStackParams } from '../navigator/TeamsStackNavigator';
 import { PokemonCard } from './PokemonCard';
-import { useTranslation } from 'react-i18next';
 
 
 

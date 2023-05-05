@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { View, StyleSheet, TextInput, ViewStyle, StyleProp } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useTranslation } from 'react-i18next';
 
 import { useDebounce } from '../hooks/useDebounce';
-import { useTranslation } from 'react-i18next';
 
 
 interface Props {

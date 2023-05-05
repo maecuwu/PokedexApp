@@ -1,11 +1,12 @@
+import { useContext } from 'react';
 import { Text, View, ScrollView, Image } from 'react-native';
+
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useScrapping } from '../hooks/useScrapping';
 import { LoadingComponent } from '../components/LoadingComponent';
-import { useContext } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
 import { globalStyles } from '../theme/appTheme';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CompetitivePokemon } from '../components/CompetitivePokemon';
 import { Spacer } from '../components/Spacer';
 

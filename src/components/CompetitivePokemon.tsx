@@ -1,9 +1,10 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
-import { usePokemon } from '../hooks/usePokemon';
 import { useContext } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import { Image, StyleSheet, Text, View } from 'react-native';
+
 import { useTranslation } from 'react-i18next';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
+import { usePokemon } from '../hooks/usePokemon';
+import { ThemeContext } from '../context/ThemeContext';
 
 
 interface Props {

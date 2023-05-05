@@ -1,8 +1,7 @@
-import { createContext, useEffect, useReducer } from 'react'
-import { Appearance, AppState } from 'react-native';
+import { createContext, useReducer } from 'react'
+import { Appearance } from 'react-native';
 
 import { ThemeState, darkTheme, lightTheme, themeReducer } from './themeReducer';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export interface ThemeContextProps {
@@ -19,11 +18,11 @@ export const ThemeProvider = ({ children }: any) => {
         (Appearance.getColorScheme() === 'dark') ? darkTheme : lightTheme);
 
 
-    const setDarkTheme = async () => {
+    const setDarkTheme = () => {
         dispatch({ type: 'set_dark_theme' })
     }
 
-    const setLightTheme = async () => {
+    const setLightTheme = () => {
         dispatch({ type: 'set_light_theme' })
     }
 

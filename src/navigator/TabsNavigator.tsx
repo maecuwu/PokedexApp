@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 
 import { PokemonStackNavigator } from './PokemonStackNavigator';
 import { SearchScreen } from '../screens/SearchScreen';
-import { TeamsStackNavigator } from './TeamsStackNavigator';
 import { ThemeContext } from '../context/ThemeContext';
 import { SettingsScreen } from '../screens/SettingsScreen';
 import { TopTabs } from './TopTabsNavigator';

@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { globalStyles } from '../theme/appTheme';
+
 import { Picker } from '@react-native-picker/picker';
-import i18n from '../../i18n';
-import { ThemeContext } from '../context/ThemeContext';
 import { useTranslation } from 'react-i18next';
+import i18n from '../../i18n';
+
+import { globalStyles } from '../theme/appTheme';
+import { ThemeContext } from '../context/ThemeContext';
 
 
 export const SettingsScreen = () => {

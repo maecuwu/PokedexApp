@@ -13,9 +13,6 @@ import { PokemonTeamContext } from '../context/PokemonTeamContext';
 import { MiniPokemonImage } from '../components/MiniPokemonImage';
 import { Spacer } from '../components/Spacer';
 import { ThemeContext } from '../context/ThemeContext';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
-
 
 
 type ScreenNavigationProp = StackNavigationProp<TeamsRootStackParams, 'TeamsScreen'>;
