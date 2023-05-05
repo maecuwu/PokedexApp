@@ -14,6 +14,7 @@ import { Spacer } from '../components/Spacer';
 import { ExportModal } from '../components/ExportModal';
 import { ImportModal } from '../components/ImportModal';
 import { ThemeContext } from '../context/ThemeContext';
+import { Surprise } from '../components/Surprise';
 
 
 
@@ -198,6 +199,7 @@ export const TeamScreen = ({ navigation, route }: Props) => {
                 </TouchableOpacity>
 
             </View>
+            <Surprise />
             <Spacer />
         </ScrollView>
     )

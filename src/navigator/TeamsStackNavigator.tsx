@@ -8,6 +8,7 @@ import { AddPokemonScreen } from '../screens/AddPokemonScreen';
 import { PokemonScreen } from '../screens/PokemonScreen';
 import { SimplePokemon } from '../interfaces/pokemonInterfaces';
 import { ThemeContext } from '../context/ThemeContext';
+import { SurpriseScreen } from '../screens/SurpriseScreen';
 
 
 export type TeamsRootStackParams = {
@@ -15,6 +16,7 @@ export type TeamsRootStackParams = {
     TeamScreen: { pokemonTeam?: string, editMode: boolean };
     AddPokemonScreen: { editMode: boolean, index?: number };
     PokemonScreen: { pokemon: SimplePokemon, bgColor: string, fontColor: string, addPossible: boolean, editPossible: boolean };
+    SurpriseScreen: undefined;
 }
 
 
@@ -35,6 +37,7 @@ export const TeamsStackNavigator = () => {
         >
             <Stack.Screen name="TeamsScreen" component={TeamsScreen} />
             <Stack.Screen name="TeamScreen" component={TeamScreen} />
+            <Stack.Screen name="SurpriseScreen" component={SurpriseScreen} />
             <Stack.Screen name="AddPokemonScreen" component={AddPokemonScreen} />
             <Stack.Screen name="PokemonScreen" component={PokemonScreen} />
         </Stack.Navigator>
