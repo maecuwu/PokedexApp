@@ -1,5 +1,5 @@
-import { useContext, useRef, useState } from 'react';
-import { StyleSheet, TouchableOpacity, View, Animated, PanResponder } from 'react-native';
+import { useContext, useRef } from 'react';
+import { StyleSheet, TouchableOpacity, View, Animated, PanResponder, Vibration } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -21,6 +21,7 @@ export const SurpriseScreen = ({ navigation }: Props) => {
 
     let touches: number = 0;
 
+
     const panResponder = PanResponder.create({
         onStartShouldSetPanResponder: () => true,
         onPanResponderMove: Animated.event(
@@ -37,15 +38,16 @@ export const SurpriseScreen = ({ navigation }: Props) => {
                 pan, // Auto-multiplexed
                 { toValue: { x: 0, y: 0 }, useNativeDriver: false }, // Back to zero
             ).start();
-            touches++;  
-            checkEnfado();           
+            touches++;
+            checkEnfado();
 
 
         },
     });
 
     const checkEnfado = () => {
-        if (touches == 10){
+
+        if (touches == 10) {
             Sound.setCategory('Playback');
 
             let sound = new Sound('thunder_sound.mp3', Sound.MAIN_BUNDLE, (error) => {
@@ -53,6 +55,7 @@ export const SurpriseScreen = ({ navigation }: Props) => {
                     console.log('Error cargando el audio -->', error)
                     return;
                 } else {
+                    Vibration.vibrate(1000);
                     sound.setVolume(1);
                     sound.play(success => {
                         if (success) console.log('Se ha reproducido bien!!');

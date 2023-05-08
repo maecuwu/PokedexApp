@@ -30,9 +30,9 @@ export const Surprise = () => {
 
 const styles = StyleSheet.create({
     container: {
-        opacity: 0.1,
+        opacity: 0.2,
         marginLeft: 200,
-        marginTop: 100
+        marginTop: 100,
     },
     pikachu: {
         width: 30,
