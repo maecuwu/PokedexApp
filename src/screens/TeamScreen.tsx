@@ -238,7 +238,8 @@ const styles = StyleSheet.create({
     textInput: {
         flex: 1,
         fontSize: 18,
-        top: 2
+        top: 2,
+        color: 'black'
     },
     teamContainer: {
         marginTop: 50,

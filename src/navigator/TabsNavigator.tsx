@@ -26,7 +26,7 @@ export const TabsNavigator = () => {
                 headerShown: false,
                 tabBarActiveTintColor: '#5856D6',
                 tabBarLabelStyle: {
-                    marginBottom: 2,
+                    marginBottom: 1,
                     fontSize: 14
                 },
                 tabBarStyle: {

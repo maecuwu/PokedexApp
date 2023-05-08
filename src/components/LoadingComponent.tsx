@@ -13,7 +13,7 @@ export const LoadingComponent = () => {
 
     if (dark) {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.background }}>
                 <ActivityIndicator size={50} color='white' />
                 <Text style={{color: colors.text}}>
                     {t('loading')}
@@ -23,7 +23,7 @@ export const LoadingComponent = () => {
     }
 
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.background }}>
             <ActivityIndicator size={50} color='grey' />
             <Text>
                 {t('loading')}
