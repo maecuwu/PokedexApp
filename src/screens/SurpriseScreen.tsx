@@ -48,17 +48,22 @@ export const SurpriseScreen = ({ navigation }: Props) => {
         if (touches == 10){
             Sound.setCategory('Playback');
 
-            let sound = new Sound('thunder-sound.mp3', Sound.MAIN_BUNDLE, (error) => {
+            let sound = new Sound('thunder_sound.mp3', Sound.MAIN_BUNDLE, (error) => {
                 if (error) {
-                    console.log('No se pudo reproducir')
+                    console.log('Error cargando el audio -->', error)
                     return;
+                } else {
+                    sound.setVolume(1);
+                    sound.play(success => {
+                        if (success) console.log('Se ha reproducido bien!!');
+                        else console.log('No se ha podido reproducir!!');
+                    });
                 }
             });
-            sound.setVolume(1);
-            sound.play();
 
             setTimeout(() => {
                 navigation.pop();
+                touches = 0;
             }, (1000));
         }
     }
