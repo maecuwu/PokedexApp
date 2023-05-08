@@ -7,6 +7,7 @@ import i18n from '../../i18n';
 
 import { globalStyles } from '../theme/appTheme';
 import { ThemeContext } from '../context/ThemeContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export const SettingsScreen = () => {
@@ -19,9 +20,10 @@ export const SettingsScreen = () => {
     const [selectedTheme, setSelectedTheme] = useState<string>();
 
 
-    const onLanguageChange = (language: string) => {
+    const onLanguageChange = async(language: string) => {
         setSelectedLanguage(language);
         i18n.changeLanguage(language);
+        await AsyncStorage.setItem('language', language);
     }
 
     const onThemeChange = () => {

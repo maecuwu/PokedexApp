@@ -119,7 +119,7 @@ export const TeamsScreen = () => {
                                         }
                                     >
                                         <Text style={{ fontSize: 20, color: 'black', textAlign: 'center' }}>
-                                            {equipo}
+                                            {equipo.substring(5, equipo.length)}
                                         </Text>
 
                                         <View style={styles.deleteBtn}>

@@ -74,10 +74,10 @@ export const PokemonTeamProvider = ({ children }: any) => {
     const saveTeam = async () => {
 
         if (state.name.length > 0) {
-            await AsyncStorage.setItem(state.name, JSON.stringify(state));
+            await AsyncStorage.setItem('team-' + state.name, JSON.stringify(state));
         }
         else {
-            await AsyncStorage.setItem('Equipo sin nombre', JSON.stringify(state));
+            await AsyncStorage.setItem('team-Equipo sin nombre', JSON.stringify(state));
         }
     }
 
@@ -99,12 +99,18 @@ export const PokemonTeamProvider = ({ children }: any) => {
 
     const getAllTeams = async () => {
 
-        let keys: readonly string[] = []
+        let keys: readonly string[] = [];
+        let teams: string[] =[];
 
         try {
 
-            keys = await AsyncStorage.getAllKeys()
-            return Array.from(keys);
+            keys = await AsyncStorage.getAllKeys();
+
+            keys.forEach( k => {
+                if (k.startsWith('team')) teams.push(k);
+            });
+
+            return teams;
 
         } catch (error) {
             console.log({ error })
