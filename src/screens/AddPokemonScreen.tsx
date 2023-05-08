@@ -95,7 +95,7 @@ export const AddPokemonScreen = ({ navigation, route }: Props) => {
                             ...globalStyles.title,
                             ...globalStyles.globalMargin,
                             top: top + 20,
-                            color: 'black',
+                            color: colors.text,
                             marginBottom: 20,
                             paddingBottom: 10,
                             marginTop: top + 80
