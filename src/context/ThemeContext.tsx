@@ -1,9 +1,10 @@
 import { createContext, useReducer, useEffect } from 'react';
 import { Appearance } from 'react-native';
 
-import { ThemeState, darkTheme, lightTheme, themeReducer } from './themeReducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import i18n from '../../i18n';
+
+import { ThemeState, darkTheme, lightTheme, themeReducer } from './themeReducer';
 
 
 export interface ThemeContextProps {

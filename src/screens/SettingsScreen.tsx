@@ -3,11 +3,11 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import { Picker } from '@react-native-picker/picker';
 import { useTranslation } from 'react-i18next';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import i18n from '../../i18n';
 
 import { globalStyles } from '../theme/appTheme';
 import { ThemeContext } from '../context/ThemeContext';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export const SettingsScreen = () => {
