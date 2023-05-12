@@ -14,7 +14,7 @@
             "exportModal": "Exportar equipo a Pokemon Showdown",
             "import": "Importar",
             "importModal": "Importar equipo desde Pokemon Showdown",
-            "saveBtn": "Guardar"
+            "saveBtn": "Guardar"            
         },
         "TeamsScreen": {
             "title": "Tus equipos",
@@ -41,7 +41,8 @@
             "noPokemon": "Sin pokemon"
         },
         "ExportModal": {
-            "close": "Cerrar"
+            "close": "Cerrar",
+            "shareTeamTitle": "¡Comparte tu equipo Pokemon con tus amigos!"
         },
         "ImportModal": {
             "import": "Importar"

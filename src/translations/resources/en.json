@@ -41,7 +41,8 @@
             "noPokemon": "No Pokemon"
         },
         "ExportModal": {
-            "close": "Close"
+            "close": "Close",
+            "shareTeamTitle": "Share your Pokemon team with your friends!"
         },
         "ImportModal": {
             "import": "Import"

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { Modal, Text, View, Dimensions, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { Modal, Text, View, Dimensions, TouchableOpacity, StyleSheet, ScrollView, Share, Alert } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import Clipboard from '@react-native-clipboard/clipboard';
@@ -31,7 +31,6 @@ export const ExportModal = ({ bodyText, title, visibleLoad, onRedraw }: Props) =
         setVisible(!visible);
     }, [onRedraw])
 
-
     useEffect(() => {
         if (copied == true) {
             setTimeout(() => {
@@ -40,12 +39,25 @@ export const ExportModal = ({ bodyText, title, visibleLoad, onRedraw }: Props) =
         }
     }, [copied])
 
+
     const copyClipboard = () => {
 
         setCopied(true);
 
         Clipboard.setString(bodyText);
     }
+
+    const onShare = async () => {
+        try {
+            await Share.share({
+                message: bodyText,
+                title: t('shareTeamTitle').toString()
+            });
+        } catch (error: any) {
+            Alert.alert(error.message);
+        }
+    }
+
 
     return (
         <Modal
@@ -117,6 +129,14 @@ export const ExportModal = ({ bodyText, title, visibleLoad, onRedraw }: Props) =
                                 </TouchableOpacity>
                             )
                     }
+
+                    <TouchableOpacity
+                        activeOpacity={0.8}
+                        style={styles.shareBtn}
+                        onPress={onShare}
+                    >
+                        <Icon name='share-social-outline' color={colors.text} size={30} />
+                    </TouchableOpacity>
                 </View>
 
             </ScrollView>
@@ -129,8 +149,14 @@ const styles = StyleSheet.create({
     copyBtn: {
         position: 'absolute',
         zIndex: 999,
-        top: 20,
+        bottom: 20,
         right: 10
+    },
+    shareBtn: {
+        position: 'absolute',
+        zIndex: 999,
+        bottom: 20,
+        right: 50
     },
     closeBtn: {
         marginBottom: 30,
