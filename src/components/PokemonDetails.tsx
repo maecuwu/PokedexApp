@@ -31,8 +31,8 @@ export const PokemonDetails = ({ pokemon, color }: Props) => {
                 </Text>
                 <View style={{ flexDirection: 'row' }}>
                     {
-                        pokemon.types.map(({ type }) => (
-                            <Text key={type.name}
+                        pokemon.types.map(({ type }, index) => (
+                            <Text key={type.name + index}
                                 style={{ ...styles.regularText, marginRight: 10, color: colors.text }}>
                                 {type.name}
                             </Text>
@@ -79,9 +79,9 @@ export const PokemonDetails = ({ pokemon, color }: Props) => {
                 </Text>
                 <View style={{ flexDirection: 'row' }}>
                     {
-                        pokemon.abilities.map(({ ability }) => (
+                        pokemon.abilities.map(({ ability }, index) => (
                             <Text
-                                key={ability.name}
+                                key={ability.name + index}
                                 style={{ ...styles.regularText, marginRight: 10, color: colors.text }}
                             >
                                 {ability.name}
@@ -98,9 +98,9 @@ export const PokemonDetails = ({ pokemon, color }: Props) => {
                 </Text>
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
                     {
-                        pokemon.moves.map(({ move }) => (
+                        pokemon.moves.map(({ move }, index) => (
                             <Text
-                                key={move.name}
+                                key={move.name +  index}
                                 style={{ ...styles.regularText, marginRight: 10, color: colors.text }}
                             >
                                 {move.name}
