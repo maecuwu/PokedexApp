@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     deleteBtn: {
         position: 'relative',
         top: -20,
-        left: 270,
+        left: '85%',
         zIndex: 9999,
         backgroundColor: '#FF8E8E',
         width: 25,
