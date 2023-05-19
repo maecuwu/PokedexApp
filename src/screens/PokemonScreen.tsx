@@ -160,14 +160,14 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                                 </TouchableOpacity>
                             </View>
 
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-around', top: top + 10 }}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-around', top: top + 10, alignItems: 'center' }}>
                                 <Text style={{ ...styles.pokemonNameCollapsed, color: fontColor }}>
                                     {pokemon.name.charAt(0).toUpperCase() + pokemon.name.substring(1, 50)}
                                 </Text>
 
                                 <Image
                                     source={{ uri: pokemon.picture }}
-                                    style={{ ...styles.pokemonImageCollapsed, top: top - 10 }}
+                                    style={{ ...styles.pokemonImageCollapsed, top: top }}
                                 />
                             </View>
                         </View>

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { Image, Text, View, TouchableOpacity, ScrollView, RefreshControl, StyleSheet } from 'react-native';
+import { Image, Text, View, TouchableOpacity, ScrollView, RefreshControl, StyleSheet, Dimensions } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -13,6 +13,10 @@ import { PokemonTeamContext } from '../context/PokemonTeamContext';
 import { MiniPokemonImage } from '../components/MiniPokemonImage';
 import { Spacer } from '../components/Spacer';
 import { ThemeContext } from '../context/ThemeContext';
+
+
+
+const { width: screenWidth } = Dimensions.get('window');
 
 
 type ScreenNavigationProp = StackNavigationProp<TeamsRootStackParams, 'TeamsScreen'>;
@@ -205,7 +209,7 @@ const styles = StyleSheet.create({
     deleteBtn: {
         position: 'relative',
         top: -20,
-        left: '85%',
+        left: screenWidth * 0.585,
         zIndex: 9999,
         backgroundColor: '#FF8E8E',
         width: 25,

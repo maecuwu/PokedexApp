@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet, TextInput, ViewStyle, StyleProp } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useTranslation } from 'react-i18next';
 
 import { useDebounce } from '../hooks/useDebounce';
+import { ThemeContext } from '../context/ThemeContext';
 
 
 interface Props {
@@ -16,6 +17,8 @@ interface Props {
 export const SearchInput = ({ style, onDebounce }: Props) => {
 
     const { t } = useTranslation("translation");
+
+    const { theme: { colors } } = useContext(ThemeContext);
 
     const [textValue, setTextValue] = useState('');
     const { debounceValue } = useDebounce(textValue);
@@ -37,6 +40,7 @@ export const SearchInput = ({ style, onDebounce }: Props) => {
                     autoCorrect={false}
                     value={textValue}
                     onChangeText={setTextValue}
+                    placeholderTextColor={colors.text}
                 />
 
                 <Icon name='search-outline' color='grey' size={30} />

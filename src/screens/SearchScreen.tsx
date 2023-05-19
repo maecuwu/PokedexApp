@@ -66,7 +66,7 @@ export const SearchScreen = () => {
                     position: 'absolute',
                     zIndex: 999,
                     width: screenWidth - 40,
-                    top: top + 10
+                    top: top + 30
                 }}
             />
 
