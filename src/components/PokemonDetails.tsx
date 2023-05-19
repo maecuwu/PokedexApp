@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Text, View, StyleSheet, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, ScrollView, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
 
 import { useTranslation } from 'react-i18next';
 
@@ -11,17 +11,25 @@ import { ThemeContext } from '../context/ThemeContext';
 interface Props {
     pokemon: FullPokemon;
     color: string;
+    onScroll: (scrollValue: number) => void;
 }
 
 
-export const PokemonDetails = ({ pokemon, color }: Props) => {
+export const PokemonDetails = ({ pokemon, color, onScroll }: Props) => {
 
     const { t } = useTranslation("translation", { keyPrefix: "PokemonDetails" });
 
     const { theme: { colors } } = useContext(ThemeContext);
 
+    const onHandleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+        const scrollValue = event.nativeEvent.contentOffset.y;
+        onScroll(scrollValue);
+    }
+
+
     return (
-        <ScrollView style={{ ...StyleSheet.absoluteFillObject }} showsVerticalScrollIndicator={false}>
+        <ScrollView style={{ ...StyleSheet.absoluteFillObject }} showsVerticalScrollIndicator={false} 
+            onScroll={(event) => onHandleScroll(event)}>
 
             {/* TIPOS Y PESO */}
             <View style={{ ...styles.container, marginTop: 370 }}>

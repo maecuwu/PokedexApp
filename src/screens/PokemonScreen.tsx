@@ -1,5 +1,5 @@
-import { useContext } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, ActivityIndicator, Alert, Dimensions } from 'react-native';
+import { useContext, useEffect, useState } from 'react'
+import { Text, View, StyleSheet, TouchableOpacity, ActivityIndicator, Alert, Dimensions, Image } from 'react-native';
 
 import { StackScreenProps } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -14,7 +14,7 @@ import { PokemonTeamContext } from '../context/PokemonTeamContext';
 
 
 
-const { height: screenHeight } = Dimensions.get('window');
+const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 
 
 interface Props extends StackScreenProps<PokemonRootStackParams, 'PokemonScreen'> { };
@@ -23,13 +23,31 @@ interface Props extends StackScreenProps<PokemonRootStackParams, 'PokemonScreen'
 export const PokemonScreen = ({ navigation, route }: Props) => {
 
     const { bgColor, pokemon, fontColor, addPossible, editPossible, editIndex } = route.params;
-    
+
+    const [scrollValue, setScrollValue] = useState(0);
+    const [collapseHeader, setCollapseHeader] = useState(false);
+
     const { top } = useSafeAreaInsets();
 
     const { t } = useTranslation("translation", { keyPrefix: "AddPokemonScreen" })
 
     const { isLoading, pokemon: pokemonInfo } = usePokemon(pokemon.id);
     const { addPokemon, editPokemon } = useContext(PokemonTeamContext);
+
+    useEffect(() => {
+        if (scrollValue >= 150) {
+            setCollapseHeader(true);
+        } else {
+            setCollapseHeader(false);
+        }
+        console.log(collapseHeader);
+    }, [scrollValue])
+
+
+
+    const handleScroll = (value: number) => {
+        setScrollValue(value);
+    }
 
     const showAlertAdd = () => {
 
@@ -65,65 +83,97 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
 
     return (
         <View style={{ flex: 1 }}>
-            <View style={{
-                ...styles.headerContainer,
-                backgroundColor: bgColor,
-                height: screenHeight * 0.5
-            }}>
 
-                <TouchableOpacity
-                    activeOpacity={0.7}
-                    style={{ ...styles.backButton, top: top + 10 }}
-                    onPress={() => navigation.goBack()}
-                >
+            {
+                (!collapseHeader)
+                    ? (
+                        <View style={{
+                            ...styles.headerContainer,
+                            backgroundColor: bgColor,
+                            height: screenHeight * 0.5
+                        }}>
 
-                    <Icon name='arrow-back-outline' color={fontColor} size={35} />
+                            <TouchableOpacity
+                                activeOpacity={0.7}
+                                style={{ ...styles.backButton, top: top + 10 }}
+                                onPress={() => navigation.goBack()}
+                            >
 
-                </TouchableOpacity>
+                                <Icon name='arrow-back-outline' color={fontColor} size={35} />
 
-                {
-                    (addPossible)
-                    && (
-                        <TouchableOpacity
-                            activeOpacity={0.7}
-                            style={{ ...styles.addButton, top: top + 30 }}
-                            onPress={showAlertAdd}
-                        >
+                            </TouchableOpacity>
 
-                            <Icon name='add-circle-outline' color={fontColor} size={35} />
+                            {
+                                (addPossible)
+                                && (
+                                    <TouchableOpacity
+                                        activeOpacity={0.7}
+                                        style={{ ...styles.addButton, top: top + 30 }}
+                                        onPress={showAlertAdd}
+                                    >
 
-                        </TouchableOpacity>
+                                        <Icon name='add-circle-outline' color={fontColor} size={35} />
+
+                                    </TouchableOpacity>
+                                )
+                            }
+
+                            {
+                                (editPossible)
+                                && (
+                                    <TouchableOpacity
+                                        activeOpacity={0.7}
+                                        style={{ ...styles.addButton, top: top + 30 }}
+                                        onPress={showAlertEdit}
+                                    >
+
+                                        <Icon name='pencil-outline' color={fontColor} size={35} />
+
+                                    </TouchableOpacity>
+                                )
+                            }
+
+                            <Text style={{ ...styles.pokemonName, top: top + 40, color: fontColor }}>
+                                {pokemon.name.charAt(0).toUpperCase() + pokemon.name.substring(1, 50)}
+                                {'\n#' + pokemon.id}
+                            </Text>
+
+                            <FadeInImage
+                                uri={pokemon.picture}
+                                style={styles.pokemonImage}
+                            />
+
+                        </View>
                     )
-                }
+                    : (
+                        <View style={{
+                            backgroundColor: bgColor,
+                            height: screenHeight * 0.1,
+                            ...styles.collapsedHeader
+                        }}>
+                            <View style={{ ...styles.backButton, top: top + 10 }}>
+                                <TouchableOpacity
+                                    activeOpacity={0.7}
+                                    onPress={() => navigation.goBack()}
+                                >
+                                    <Icon name='arrow-back-outline' color={fontColor} size={35} />
+                                </TouchableOpacity>
+                            </View>
 
-                {
-                    (editPossible)
-                    && (
-                        <TouchableOpacity
-                            activeOpacity={0.7}
-                            style={{ ...styles.addButton, top: top + 30 }}
-                            onPress={showAlertEdit}
-                        >
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-around', top: top + 10 }}>
+                                <Text style={{ ...styles.pokemonNameCollapsed, color: fontColor }}>
+                                    {pokemon.name.charAt(0).toUpperCase() + pokemon.name.substring(1, 50)}
+                                </Text>
 
-                            <Icon name='pencil-outline' color={fontColor} size={35} />
-
-                        </TouchableOpacity>
+                                <Image
+                                    source={{ uri: pokemon.picture }}
+                                    style={{ ...styles.pokemonImageCollapsed, top: top - 10 }}
+                                />
+                            </View>
+                        </View>
                     )
-                }
+            }
 
-
-
-                <Text style={{ ...styles.pokemonName, top: top + 40, color: fontColor }}>
-                    {pokemon.name.charAt(0).toUpperCase() + pokemon.name.substring(1, 50)}
-                    {'\n#' + pokemon.id}
-                </Text>
-
-                <FadeInImage
-                    uri={pokemon.picture}
-                    style={styles.pokemonImage}
-                />
-
-            </View>
 
             {
                 isLoading
@@ -132,7 +182,7 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                             <ActivityIndicator color={bgColor} size={50} />
                         </View>
                     )
-                    : <PokemonDetails pokemon={pokemonInfo!} color={bgColor} />
+                    : <PokemonDetails pokemon={pokemonInfo!} color={bgColor} onScroll={handleScroll} />
             }
 
         </View>
@@ -148,7 +198,8 @@ const styles = StyleSheet.create({
     },
     backButton: {
         position: 'absolute',
-        left: 20
+        left: 20,
+        zIndex: 99999
     },
     addButton: {
         position: 'absolute',
@@ -164,6 +215,18 @@ const styles = StyleSheet.create({
         height: 250,
         position: 'absolute',
         bottom: -15
+    },
+    collapsedHeader: {
+        zIndex: 10,
+    },
+    pokemonNameCollapsed: {
+        fontSize: 25,
+        marginLeft: screenWidth * 0.25,
+        flexWrap: 'wrap'
+    },
+    pokemonImageCollapsed: {
+        width: 60,
+        height: 60,
     },
     loadingContainer: {
         flex: 1,
