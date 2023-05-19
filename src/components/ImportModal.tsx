@@ -63,7 +63,6 @@ export const ImportModal = ({ title, visibleLoad, onRedraw }: Props) => {
         setVisible(!visible);
 
         const parsedTeam = JSON.parse(Koffing.parse(importString).toJson());
-        console.log(parsedTeam.teams[0].pokemon);
 
         changeTeamName(parsedTeam.teams[0].name);
 
