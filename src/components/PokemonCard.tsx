@@ -34,8 +34,6 @@ export const PokemonCard = ({ pokemon, addPossible, editPossible, index }: Props
         ImageColors.getColors(pokemon.picture, { fallback: 'grey' }).then(
             (colors: any) => {
 
-                if (!isMounted.current) return;
-
                 if (colors.platform === 'android') {
                     setBgColor(colors.dominant || 'grey')
                     setFontColor(colors.average || 'white');

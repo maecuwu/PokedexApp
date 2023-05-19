@@ -19,7 +19,9 @@ export const usePokemonPaginated = () => {
         nextPageUrl.current = data.next;
         mapPokemonList(data.results);
 
-        setIsLoading(false);
+        setTimeout(() => {            
+            setIsLoading(false);
+        }, 1200);
     }
 
     const mapPokemonList = (pokemonList: Result[]) => {
