@@ -112,7 +112,7 @@ export const ImportModal = ({ title, visibleLoad, onRedraw }: Props) => {
                     </Text>
 
                     <TextInput
-                        style={styles.importInput}
+                        style={{ ...styles.importInput, borderColor: colors.text, color: colors.text }}
                         value={importString}
                         onChangeText={(value) => onChange(value, 'importString')}
                     />
@@ -153,7 +153,6 @@ const styles = StyleSheet.create({
     importInput: {
         borderRadius: 5,
         borderWidth: 2,
-        borderColor: 'black',
         height: 50,
         width: '100%',
         marginVertical: 30,
