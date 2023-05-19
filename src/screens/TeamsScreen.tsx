@@ -115,17 +115,8 @@ export const TeamsScreen = () => {
                     (allTeams?.length !== undefined)
                         ? (
                             allTeams.map((equipo, index) => (
-                                <View style={styles.cardContainer} key={equipo + index}>
-                                    <TouchableOpacity
-                                        activeOpacity={0.8}
-                                        onPress={() =>
-                                            navigator.navigate('TeamScreen', { pokemonTeam: equipo, editMode: true })
-                                        }
-                                    >
-                                        <Text style={{ fontSize: 20, color: 'black', textAlign: 'center' }}>
-                                            {equipo.substring(5, equipo.length)}
-                                        </Text>
-
+                                <>
+                                    <View style={styles.cardContainer} key={equipo + index}>
                                         <View style={styles.deleteBtn}>
                                             <TouchableOpacity
                                                 activeOpacity={0.8}
@@ -134,14 +125,25 @@ export const TeamsScreen = () => {
                                                 <Icon name='close-outline' color='black' size={20} />
                                             </TouchableOpacity>
                                         </View>
-
-                                        <View style={styles.allPokemonContainer}>
-                                            {
-                                                <MiniPokemonImage teamName={equipo} />
+                                        <TouchableOpacity
+                                            activeOpacity={0.8}
+                                            onPress={() =>
+                                                navigator.navigate('TeamScreen', { pokemonTeam: equipo, editMode: true })
                                             }
-                                        </View>
-                                    </TouchableOpacity>
-                                </View>
+                                        >
+                                            <Text style={{ fontSize: 20, color: 'black', textAlign: 'center' }}>
+                                                {equipo.substring(5, equipo.length)}
+                                            </Text>
+
+
+                                            <View style={styles.allPokemonContainer}>
+                                                {
+                                                    <MiniPokemonImage teamName={equipo} />
+                                                }
+                                            </View>
+                                        </TouchableOpacity>
+                                    </View>
+                                </>
                             ))
                         )
                         : (
@@ -207,9 +209,6 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     deleteBtn: {
-        position: 'absolute',
-        top: 5,
-        right: 5,
         zIndex: 9999,
         backgroundColor: '#FF8E8E',
         width: 25,
@@ -218,6 +217,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 10,
         borderColor: 'black',
-        borderWidth: 2
+        borderWidth: 2,
+        position: 'absolute',
+        left: screenWidth * 0.78,
+        top: 10,
     },
 });
