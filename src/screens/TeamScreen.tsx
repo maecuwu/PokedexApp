@@ -63,12 +63,24 @@ export const TeamScreen = ({ navigation, route }: Props) => {
 
         if (modalVisible == true && editMode) {
 
-            const pokemon1 = pokemons[0] ? pokemons[0]?.name.charAt(0).toLocaleUpperCase() + pokemons[0].name.substring(1, 100) + '\nLevel 100' : '';
-            const pokemon2 = pokemons[1] ? pokemons[1]?.name.charAt(0).toLocaleUpperCase() + pokemons[1].name.substring(1, 100) + '\nLevel 100' : '';
-            const pokemon3 = pokemons[2] ? pokemons[2]?.name.charAt(0).toLocaleUpperCase() + pokemons[2].name.substring(1, 100) + '\nLevel 100' : '';
-            const pokemon4 = pokemons[3] ? pokemons[3]?.name.charAt(0).toLocaleUpperCase() + pokemons[3].name.substring(1, 100) + '\nLevel 100' : '';
-            const pokemon5 = pokemons[4] ? pokemons[4]?.name.charAt(0).toLocaleUpperCase() + pokemons[4].name.substring(1, 100) + '\nLevel 100' : '';
-            const pokemon6 = pokemons[5] ? pokemons[5]?.name.charAt(0).toLocaleUpperCase() + pokemons[5].name.substring(1, 100) + '\nLevel 100' : '';
+            const pokemon1 = pokemons[0] 
+                ? pokemons[0]?.name.charAt(0).toLocaleUpperCase() + pokemons[0].name.substring(1, 100) + '\nLevel 100' + '\n' 
+                : '';
+            const pokemon2 = pokemons[1] 
+                ? pokemons[1]?.name.charAt(0).toLocaleUpperCase() + pokemons[1].name.substring(1, 100) + '\nLevel 100' + '\n' 
+                : '';
+            const pokemon3 = pokemons[2] 
+                ? pokemons[2]?.name.charAt(0).toLocaleUpperCase() + pokemons[2].name.substring(1, 100) + '\nLevel 100' + '\n' 
+                : '';
+            const pokemon4 = pokemons[3] 
+                ? pokemons[3]?.name.charAt(0).toLocaleUpperCase() + pokemons[3].name.substring(1, 100) + '\nLevel 100' + '\n' 
+                : '';
+            const pokemon5 = pokemons[4] 
+                ? pokemons[4]?.name.charAt(0).toLocaleUpperCase() + pokemons[4].name.substring(1, 100) + '\nLevel 100' + '\n' 
+                : '';
+            const pokemon6 = pokemons[5] 
+                ? pokemons[5]?.name.charAt(0).toLocaleUpperCase() + pokemons[5].name.substring(1, 100) + '\nLevel 100' + '\n' 
+                : '';
 
             const exportString = `            
             ${pokemon1}

@@ -65,7 +65,7 @@ export const ExportModal = ({ bodyText, title, visibleLoad, onRedraw }: Props) =
             visible={!visible}
             transparent={true}
         >
-            <ScrollView contentContainerStyle={{
+            <View style={{
                 flex: 1,
                 backgroundColor: 'rgba(0, 0, 0, 0.5)',
                 justifyContent: 'center',
@@ -139,7 +139,7 @@ export const ExportModal = ({ bodyText, title, visibleLoad, onRedraw }: Props) =
                     </TouchableOpacity>
                 </View>
 
-            </ScrollView>
+            </View>
 
         </Modal>
     )

@@ -60,6 +60,8 @@ export const ImportModal = ({ title, visibleLoad, onRedraw }: Props) => {
 
 
     const onImport = async () => {
+        console.log('importando');
+
         setVisible(!visible);
 
         const parsedTeam = JSON.parse(Koffing.parse(importString).toJson());
@@ -127,7 +129,7 @@ export const ImportModal = ({ title, visibleLoad, onRedraw }: Props) => {
 
                     <TouchableOpacity
                         activeOpacity={0.8}
-                        onPress={() => onImport}
+                        onPress={onImport}
                         style={styles.importBtn}
                     >
                         <Text style={{ fontSize: 18, color: 'black' }}>
