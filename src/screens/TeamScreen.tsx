@@ -82,14 +82,8 @@ export const TeamScreen = ({ navigation, route }: Props) => {
                 ? pokemons[5]?.name.charAt(0).toLocaleUpperCase() + pokemons[5].name.substring(1, 100) + '\nLevel 100' + '\n' 
                 : '';
 
-            const exportString = `            
-            ${pokemon1}
-            ${pokemon2}
-            ${pokemon3}
-            ${pokemon4}
-            ${pokemon5}
-            ${pokemon6}
-            `
+            const exportString = 
+            `\n${pokemon1}\n${pokemon2}\n${pokemon3}\n${pokemon4}\n${pokemon5}\n${pokemon6}`
 
             setExportString(exportString);
         }
@@ -101,13 +95,14 @@ export const TeamScreen = ({ navigation, route }: Props) => {
         setNameChanged(true);
     }
 
-    const onSaveTeam = () => {
+    const onSaveTeam = async() => {
 
         if (editMode) {
+            console.log('edit')
             if (nameChanged && team !== undefined) {
-                getTeam(team).then((eq) => {
-                    deleteTeam(eq.name);
-                })
+                console.log('cambiando nomb')
+                const eq = await getTeam(team);
+                deleteTeam(eq.name);                
             }
         }
 

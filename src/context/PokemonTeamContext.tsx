@@ -82,7 +82,7 @@ export const PokemonTeamProvider = ({ children }: any) => {
     }
 
     const deleteTeam = async (teamName: string) => {
-        await AsyncStorage.removeItem(teamName);
+        await AsyncStorage.removeItem('team-' + teamName);
     }
 
     const getTeam = async (teamName: string) => {
