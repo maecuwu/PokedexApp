@@ -15,7 +15,6 @@ import { ExportModal } from '../components/ExportModal';
 import { ImportModal } from '../components/ImportModal';
 import { ThemeContext } from '../context/ThemeContext';
 import { Surprise } from '../components/Surprise';
-import { useIsFocused } from '@react-navigation/native';
 
 
 
@@ -31,7 +30,6 @@ export const TeamScreen = ({ navigation, route }: Props) => {
     const team = route.params.pokemonTeam;
     const editMode = route.params.editMode;
 
-    const isFocused = useIsFocused();
     const { top } = useSafeAreaInsets();
 
     const { theme: { colors } } = useContext(ThemeContext);
@@ -47,11 +45,13 @@ export const TeamScreen = ({ navigation, route }: Props) => {
 
 
     useEffect(() => {
+        console.log('cambio')
 
         if (team !== undefined) {
             getTeam(team).then((equipo) => {
                 changeTeamName(equipo.name);
                 changeTeamPokemons(equipo.pokemons);
+                console.log(equipo.pokemons)
                 return;
             })
         }
@@ -59,7 +59,7 @@ export const TeamScreen = ({ navigation, route }: Props) => {
         changeTeamName(t('defaultTeamName'));
         changeTeamPokemons([]);
 
-    }, [isFocused])
+    }, [])
 
     useEffect(() => {
 
@@ -100,9 +100,7 @@ export const TeamScreen = ({ navigation, route }: Props) => {
     const onSaveTeam = async() => {
 
         if (editMode) {
-            console.log('edit')
             if (nameChanged && team !== undefined) {
-                console.log('cambiando nomb')
                 const eq = await getTeam(team);
                 deleteTeam(eq.name);                
             }

@@ -11,6 +11,8 @@ import { FadeInImage } from '../components/FadeInImage';
 import { usePokemon } from '../hooks/usePokemon';
 import { PokemonDetails } from '../components/PokemonDetails';
 import { PokemonTeamContext } from '../context/PokemonTeamContext';
+import { TeamsRootStackParams } from '../navigator/TeamsStackNavigator';
+import { CommonActions, useNavigation } from '@react-navigation/native';
 
 
 
@@ -28,11 +30,12 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
     const [collapseHeader, setCollapseHeader] = useState(false);
 
     const { top } = useSafeAreaInsets();
+    const navigatorT = useNavigation();
 
     const { t } = useTranslation("translation", { keyPrefix: "AddPokemonScreen" })
 
     const { isLoading, pokemon: pokemonInfo } = usePokemon(pokemon.id);
-    const { addPokemon, editPokemon, deletePokemon } = useContext(PokemonTeamContext);
+    const { addPokemon, editPokemon, deletePokemon, PokemonTeam } = useContext(PokemonTeamContext);
 
     useEffect(() => {
         if (scrollValue >= 150) {
@@ -100,7 +103,9 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
 
     const deleteIndex = () => {
         deletePokemon(editIndex!);
-        navigation.goBack();        
+        navigatorT.dispatch(
+            CommonActions.navigate('TeamsScreen')
+        )
     }
 
 
