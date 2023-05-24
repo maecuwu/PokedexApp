@@ -22,6 +22,7 @@ type PokemonTeamContextProps = {
     changeTeamName: (newName: string) => void;
     changeTeamPokemons: (pokemons: SimplePokemon[]) => void;
     editPokemon: (index: number, pokemon: SimplePokemon) => void;
+    deletePokemon: (index: number) => void;
     saveTeam: () => void;
     deleteTeam: (teamName: string) => void;
     getTeam: (teamName: string) => Promise<PokemonTeam>;
@@ -61,7 +62,7 @@ export const PokemonTeamProvider = ({ children }: any) => {
         dispatch({ type: 'changeTeamPokemons', payload: pokemons })
     }
 
-    const editPokemon = async(index: number, pokemon: SimplePokemon) => {
+    const editPokemon = async (index: number, pokemon: SimplePokemon) => {
         dispatch({
             type: 'editPokemon', payload: {
                 index,
@@ -69,6 +70,14 @@ export const PokemonTeamProvider = ({ children }: any) => {
             }
         })
         await AsyncStorage.mergeItem(state.name, JSON.stringify(state));
+    }
+
+    const deletePokemon = async (index: number) => {
+        dispatch({
+            type: 'deletePokemon',
+            payload: index
+        })
+        await saveTeam();
     }
 
     const saveTeam = async () => {
@@ -100,13 +109,13 @@ export const PokemonTeamProvider = ({ children }: any) => {
     const getAllTeams = async () => {
 
         let keys: readonly string[] = [];
-        let teams: string[] =[];
+        let teams: string[] = [];
 
         try {
 
             keys = await AsyncStorage.getAllKeys();
 
-            keys.forEach( k => {
+            keys.forEach(k => {
                 if (k.startsWith('team')) teams.push(k);
             });
 
@@ -128,6 +137,7 @@ export const PokemonTeamProvider = ({ children }: any) => {
             changeTeamName,
             changeTeamPokemons,
             editPokemon,
+            deletePokemon,
             saveTeam,
             deleteTeam,
             getTeam,

@@ -5,7 +5,8 @@ type PokemonTeamAction =
     | { type: 'addPokemon', payload: SimplePokemon }
     | { type: 'changeTeamName', payload: string }
     | { type: 'changeTeamPokemons', payload: SimplePokemon[] }
-    | { type: 'editPokemon', payload: {index: number, pokemon: SimplePokemon} }
+    | { type: 'editPokemon', payload: { index: number, pokemon: SimplePokemon } }
+    | { type: 'deletePokemon', payload: number }
 
 
 export const pokemonTeamReducer = (state: PokemonTeam, action: PokemonTeamAction): PokemonTeam => {
@@ -39,9 +40,14 @@ export const pokemonTeamReducer = (state: PokemonTeam, action: PokemonTeamAction
                         color: action.payload.pokemon.color
                     },
                     ...state.pokemons.slice(action.payload.index + 1)
-                ]                
+                ]
             }
-        
+        case 'deletePokemon':
+            return {
+                ...state,
+                pokemons: state.pokemons.splice(action.payload, 1)
+            }
+
         default:
             return state;
     }

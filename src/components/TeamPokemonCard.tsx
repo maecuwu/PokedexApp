@@ -55,7 +55,7 @@ export const TeamPokemonCard = ({ pokemon, index }: Props) => {
                 </TouchableOpacity>
             </View>
 
-            <PokemonCard pokemon={pokemon} addPossible={false} editPossible={false} />
+            <PokemonCard pokemon={pokemon} addPossible={false} editPossible={false} deleteMode index={index}/>
         </View>
     )
 }

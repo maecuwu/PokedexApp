@@ -5,7 +5,11 @@
             "addedPokemon": "añadido a tu equipo correctamente",
             "notAddedPokemonTitle": "Pokemon no añadido",
             "notAddedPokemon": "No se ha podido añadir el pokemon a tu equipo",
-            "pokemonReplaced": "añadido a tu equipo y el anterior ha sido eliminado"
+            "pokemonReplaced": "añadido a tu equipo y el anterior ha sido eliminado",
+            "deletePokemon": "¿Quieres eliminar este Pokemon de tu equipo?",
+            "deletePokemonTitle": "Eliminar Pokemon",
+            "cancelBtn": "Cancelar",
+            "deleteBtn": "Eliminar"
         },
         "TeamScreen": {
             "defaultTeamName": "Equipo sin nombre",

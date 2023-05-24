@@ -22,7 +22,7 @@ interface Props extends StackScreenProps<PokemonRootStackParams, 'PokemonScreen'
 
 export const PokemonScreen = ({ navigation, route }: Props) => {
 
-    const { bgColor, pokemon, fontColor, addPossible, editPossible, editIndex } = route.params;
+    const { bgColor, pokemon, fontColor, addPossible, editPossible, editIndex, deleteMode } = route.params;
 
     const [scrollValue, setScrollValue] = useState(0);
     const [collapseHeader, setCollapseHeader] = useState(false);
@@ -32,7 +32,7 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
     const { t } = useTranslation("translation", { keyPrefix: "AddPokemonScreen" })
 
     const { isLoading, pokemon: pokemonInfo } = usePokemon(pokemon.id);
-    const { addPokemon, editPokemon } = useContext(PokemonTeamContext);
+    const { addPokemon, editPokemon, deletePokemon } = useContext(PokemonTeamContext);
 
     useEffect(() => {
         if (scrollValue >= 150) {
@@ -78,6 +78,29 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
             [
                 { text: 'OK' },
             ]);
+    }
+
+    const showAlertDelete = () => {
+        Alert.alert(
+            t('deletePokemonTitle'),
+            `${t('deletePokemon')}`,
+            [
+                {
+                    text: `${t('cancelBtn')}`,
+                    style: 'cancel'
+                },
+                {
+                    text: `${t('deleteBtn')}`,
+                    style: 'destructive',
+                    onPress: deleteIndex
+                }
+            ]
+        )
+    }
+
+    const deleteIndex = () => {
+        deletePokemon(editIndex!);
+        navigation.goBack();        
     }
 
 
@@ -128,6 +151,21 @@ export const PokemonScreen = ({ navigation, route }: Props) => {
                                     >
 
                                         <Icon name='pencil-outline' color={fontColor} size={35} />
+
+                                    </TouchableOpacity>
+                                )
+                            }
+
+                            {
+                                (deleteMode)
+                                && (
+                                    <TouchableOpacity
+                                        activeOpacity={0.7}
+                                        style={{ ...styles.addButton, top: top + 30 }}
+                                        onPress={showAlertDelete}
+                                    >
+
+                                        <Icon name='trash-outline' color={fontColor} size={35} />
 
                                     </TouchableOpacity>
                                 )

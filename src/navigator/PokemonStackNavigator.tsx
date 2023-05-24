@@ -16,7 +16,8 @@ export type PokemonRootStackParams = {
         fontColor: string,
         addPossible: boolean,
         editPossible: boolean,
-        editIndex?: number
+        editIndex?: number,
+        deleteMode?: boolean
     };
 }
 

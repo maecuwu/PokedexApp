@@ -17,11 +17,12 @@ interface Props {
     addPossible: boolean;
     editPossible: boolean;
     index?: number;
+    deleteMode?: boolean;
 }
 
 type ScreenNavigationProp = StackNavigationProp<PokemonRootStackParams, 'PokemonScreen'>;
 
-export const PokemonCard = ({ pokemon, addPossible, editPossible, index }: Props) => {
+export const PokemonCard = ({ pokemon, addPossible, editPossible, index, deleteMode = false }: Props) => {
 
     const [bgColor, setBgColor] = useState('grey');
     const [fontColor, setFontColor] = useState('white');
@@ -55,7 +56,8 @@ export const PokemonCard = ({ pokemon, addPossible, editPossible, index }: Props
                 fontColor,
                 addPossible,
                 editPossible,
-                editIndex: index
+                editIndex: index,
+                deleteMode
             })}
         >
             <View style={{
