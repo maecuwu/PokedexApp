@@ -23,7 +23,11 @@
         "TeamsScreen": {
             "title": "Tus equipos",
             "createTeam": "Crear equipo",
-            "noTeams": "No hay equipos creados"
+            "noTeams": "No hay equipos creados",
+            "deleteTeam": "¿Estas seguro que quieres eliminar este equipo?",
+            "deleteTeamTitle": "Eliminar equipo",
+            "cancelBtn": "Cancelar",
+            "deleteBtn": "Eliminar"
         },
         "PokemonDetails": {
             "types": "TIPOS",

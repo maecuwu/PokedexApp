@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
-import { Image, Text, View, TouchableOpacity, ScrollView, RefreshControl, StyleSheet, Dimensions } from 'react-native';
+import { Image, Text, View, TouchableOpacity, ScrollView, RefreshControl, StyleSheet, Dimensions, Alert } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useTranslation } from 'react-i18next';
 
@@ -25,6 +25,7 @@ type ScreenNavigationProp = StackNavigationProp<TeamsRootStackParams, 'TeamsScre
 export const TeamsScreen = () => {
 
     const { top } = useSafeAreaInsets();
+    const isFocused = useIsFocused();
 
     const navigator = useNavigation<ScreenNavigationProp>();
 
@@ -49,6 +50,24 @@ export const TeamsScreen = () => {
         setallTeams(teams);
 
         setRefreshing(false);
+    }
+
+    const showAlertDelete = (teamName: string) => {
+        Alert.alert(
+            t('deleteTeamTitle'),
+            `${t('deleteTeam')}`,
+            [
+                {
+                    text: `${t('cancelBtn')}`,
+                    style: 'cancel'
+                },
+                {
+                    text: `${t('deleteBtn')}`,
+                    style: 'destructive',
+                    onPress: () => onDelete(teamName)
+                }
+            ]
+        )
     }
 
     const onDelete = (teamName: string) => {
@@ -120,7 +139,7 @@ export const TeamsScreen = () => {
                                         <View style={styles.deleteBtn}>
                                             <TouchableOpacity
                                                 activeOpacity={0.8}
-                                                onPress={() => onDelete(equipo)}
+                                                onPress={() => showAlertDelete(equipo)}
                                             >
                                                 <Icon name='close-outline' color='black' size={20} />
                                             </TouchableOpacity>

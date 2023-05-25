@@ -18,7 +18,6 @@ export const pokemonTeamInitialSate: PokemonTeam = {
 type PokemonTeamContextProps = {
     PokemonTeam: PokemonTeam;
     addPokemon: (pokemon: SimplePokemon) => boolean;
-    removePokemon: () => void;
     changeTeamName: (newName: string) => void;
     changeTeamPokemons: (pokemons: SimplePokemon[]) => void;
     editPokemon: (index: number, pokemon: SimplePokemon) => void;
@@ -47,10 +46,6 @@ export const PokemonTeamProvider = ({ children }: any) => {
         }
 
         return false;
-
-    }
-
-    const removePokemon = () => {
 
     }
 
@@ -91,7 +86,11 @@ export const PokemonTeamProvider = ({ children }: any) => {
     }
 
     const deleteTeam = async (teamName: string) => {
-        await AsyncStorage.removeItem('team-' + teamName);
+        try {
+            await AsyncStorage.removeItem(teamName);         
+        } catch (error) {
+            console.log('Error borrando' + error);
+        }
     }
 
     const getTeam = async (teamName: string) => {
@@ -133,7 +132,6 @@ export const PokemonTeamProvider = ({ children }: any) => {
         <PokemonTeamContext.Provider value={{
             PokemonTeam: state,
             addPokemon,
-            removePokemon,
             changeTeamName,
             changeTeamPokemons,
             editPokemon,
